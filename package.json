@@ -1,0 +1,25 @@
+{
+  "name": "magik-server",
+  "version": "0.0.0",
+  "description": "a simple HTTP server that responds to all request methods.",
+  "main": "magik-server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@git.wsrs.net:magikmaker/magik-server.git"
+  },
+  "keywords": [
+    "http",
+    "server",
+    "http",
+    "server",
+    "development",
+    "server",
+    "mock",
+    "server"
+  ],
+  "author": "Bjørn Wikkeling",
+  "license": "MIT"
+}
