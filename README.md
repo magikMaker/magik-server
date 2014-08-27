@@ -17,18 +17,18 @@ $ magik-server --help
 ## Documentation
 
 Command line options:
-* -d --dot         Show .dot files (hidden files) in directory listings, defaults to false
-* -h --help        show help text
-* -i --index       The index file(s) to use, default searches for index.html,
-                   index.htm, index.js, default.html, default.html, default.js,
-                   app.html, app.htm, app.js. One file or a comma delimited list
-*    --ip          specify the IP address the server is bound to
-* -l --listing     Show directory listing when no suitable file is found, default: true
-* -n --not-found   custom 404 page, defaults to 404.html (.htm, .js) in document root
-* -p --port        specify port number, defaults to 8080
-* -r --root        supply the document root, defaults to project root
-* -v --version     show version number
-* -t --timeout     Set the timeout query string parameter, defaults to magik-timeout
+    * -d --dot         Show .dot files (hidden files) in directory listings, defaults to false
+    * -h --help        show help text
+    * -i --index       The index file(s) to use, default searches for index.html,
+                       index.htm, index.js, default.html, default.html, default.js,
+                       app.html, app.htm, app.js. One file or a comma delimited list
+    *    --ip          specify the IP address the server is bound to
+    * -l --listing     Show directory listing when no suitable file is found, default: true
+    * -n --not-found   custom 404 page, defaults to 404.html (.htm, .js) in document root
+    * -p --port        specify port number, defaults to 8080
+    * -r --root        supply the document root, defaults to project root
+    * -v --version     show version number
+    * -t --timeout     Set the timeout query string parameter, defaults to magik-timeout
 
 
 ## Examples
@@ -43,7 +43,7 @@ Show help info for a specific command
 magik-server -d -h
 # OR
 magik-server -dh
-#OR
+# OR
 magik-server --dot --help
 ```
 
