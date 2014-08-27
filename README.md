@@ -63,11 +63,11 @@ magik-server -p 8090 -r app -i my-app.html
 ```
 
 Set the response time query string parameter to a custom value, so you can make requests that will honour your timeout value (in ms):
-http://localhost:8080/slow-server-response.html?response-time=3000
+http://localhost:8080/slow-server-response.html?wait=3000
 
 
 ```shell
-magik-server -t response-time
+magik-server -t wait
 ```
 
 ## Contributing
