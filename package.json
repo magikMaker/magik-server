@@ -13,12 +13,8 @@
   "keywords": [
     "http",
     "server",
-    "http",
-    "server",
     "development",
-    "server",
-    "mock",
-    "server"
+    "mock"
   ],
   "author": "Bjørn Wikkeling",
   "license": "MIT",
