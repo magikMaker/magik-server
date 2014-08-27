@@ -35,30 +35,35 @@ Command line options:
 ## Examples
 
 Show help info:
+
 ```shell
 magik-server -h
 ```
 
 Show help info for a specific command
+
 ```sh
 magik-server -d -h
-
+# OR
 magik-server -dh
-
+# OR
 magik-server --dot --help
 ```
 
 Start the server on port 8080 of localhost
+
 ```sh
 magik-server
 ```
 
 Start the server on port 8090, set the document root to the app folder and set index to my-app.html
+
 ```sh
 magik-server -p 8090 -r app -i my-app.html
 ```
 
 Set the timeout query string parameter to a custom value:
+
 ```sh
 magik-server -t my-timeout-value
 ```
