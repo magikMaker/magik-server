@@ -18,18 +18,18 @@ $ magik-server --help
 
 Command line options:
 
-| shorthand | command      | description
-| --------- | ------------ | ----------------------------------------------------------------------- |
-| -d        | --dot        | Show .dot files (hidden files) in directory listings, defaults to false |
-| -h        | --help       | show help text                                                          |
-| -i        | --index      | The index file(s) to use, default searches for index.html, index.htm, index.js, default.html, default.html, default.js, app.html, app.htm, app.js. One file or a comma delimited list |
-|           | --ip         | specify the IP address the server is bound to                           |
-| -l        | --listing    | Show directory listing when no suitable file is found, default: true    |
-| -n        | --not-found  | custom 404 page, defaults to 404.html (.htm, .js) in document root      |
-| -p        | --port       | specify port number, defaults to 8080                                   |
-| -r        | --root       | supply the document root, defaults to project root                      |
-| -v        | --version    | show version number                                                     |
-| -t        | --timeout    | Set the timeout query string parameter, defaults to magik-timeout       |
+| shorthand | command         | description
+| --------- | --------------- | -------------------------------------------------------------------------- |
+| -d        | --dot           | Show .dot files (hidden files) in directory listings, defaults to false    |
+| -h        | --help          | show help text                                                             |
+| -i        | --index         | The index file(s) to use, default searches for index.html, index.htm, index.js, default.html, default.html, default.js, app.html, app.htm, app.js. One file or a comma delimited list |
+|           | --ip            | specify the IP address the server is bound to                              |
+| -l        | --listing       | Show directory listing when no suitable file is found, default: true       |
+| -n        | --not-found     | custom 404 page, defaults to 404.html (.htm, .js) in document root         |
+| -p        | --port          | specify port number, defaults to 8080                                      |
+| -r        | --root          | supply the document root, defaults to project root                         |
+| -v        | --version       | show version number                                                        |
+| -t        | --response-time | Set the response time query string parameter, default: magik-response-time |
 
 
 ## Examples
@@ -52,23 +52,23 @@ magik-server --dot --help
 
 Start the server on port 8080 of localhost
 
-```sh
+```shell
 magik-server
 ```
 
 Start the server on port 8090, set the document root to the app folder and set index to my-app.html
 
-```sh
+```shell
 magik-server -p 8090 -r app -i my-app.html
 ```
 
-Set the timeout query string parameter to a custom value:
+Set the response time query string parameter to a custom value, so you can make requests that will honour your timeout value (in ms):
+http://localhost:8080/slow-server-response.html?response-time=3000
 
-```sh
-magik-server -t my-timeout-value
+
+```shell
+magik-server -t response-time
 ```
-Now you can make requests that will honour your timeout value (in ms):
-http://localhost:8080/slow-server-response.html?my-timeout-value=3000
 
 ## Contributing
 
