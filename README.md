@@ -78,7 +78,8 @@ Add unit tests for any new or changed functionality. Lint and test your code usi
 
 ## License
 
-Copyright (c) 2014 Bjørn Wikkeling http://bjorn.wikkeling.com/
+Copyright (c) 2014 Bjørn Wikkeling [bjorn.wikkeling.com](http://bjorn.wikkeling.com/)
+
 Licensed under the MIT license.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the 'Software'), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
