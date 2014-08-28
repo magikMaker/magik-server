@@ -29,29 +29,14 @@ Command line options:
 | -n        | --not-found     | custom 404 page, defaults to 404.html (.htm, .js) in document root         |
 | -p        | --port          | specify port number, defaults to 8080                                      |
 | -r        | --root          | supply the document root, defaults to project root                         |
-| -s        | --status-code   | Set the status code query string parameter, default: magik-status          |
+| -s        | --status-code   | Set the status code query string parameter or the global status code by supplying it , default: magik-status |
 | -S        | --disable-sass  | disable parsing of SASS files, default: false                              |
+| -t        | --timeout       | Set the timeout query string parameter or the global timeout in milliseconds, default: magik-timeout / 0 |
 | -v        | --version       | show version number                                                        |
-| -t        | --timeout       | Set the timeout query string parameter, default: magik-timeout             |
+| -w        | --wizzard       | wizzard which will guide you through all available options                 |
 
 
 ## Examples
-
-Show help info:
-
-```shell
-magik-server -h
-```
-
-Show help info for a specific command
-
-```sh
-magik-server -d -h
-# OR
-magik-server -dh
-# OR
-magik-server --dot --help
-```
 
 Start the server on localhost on port 8080
 
@@ -59,18 +44,69 @@ Start the server on localhost on port 8080
 magik-server
 ```
 
+Start the server using a wizzard to set all available options:
+
+```shell
+magik-server -w
+
+#OR
+
+magik-server --wizzard
+```
+
+Show help info:
+
+```shell
+magik-server -h
+
+# or in long form
+
+magik-server --help
+```
+
+Show help info for a specific command
+
+```sh
+magik-server -d -h
+
+# or in long form
+
+magik-server -dh
+
+# or in long form
+
+magik-server --dot --help
+```
+
 Start the server on port 8090, set the document root to the app folder and set index to my-app.html
 
 ```shell
 magik-server -p 8090 -r app -i my-app.html
+
+# or in long form
+
+magik-server --port 8090 --root app --index my-app.html
 ```
 
 Set the response time query string parameter to a custom value, so you can make requests that will honour your time value (in ms):
 http://localhost:8080/slow-server-response.html?wait=3000
 
-
 ```shell
 magik-server -t wait
+
+# or in long form
+
+magik-server --timeout wait
+```
+
+You can also set a global timeout for all requests by supplying an integer value
+
+```shell
+magik-server -t 2000
+
+# or in long form
+
+magik-server --timeout 2000
 ```
 
 Set a custom HTTP response code query string parameter so it can be used in requests:
@@ -78,6 +114,10 @@ http://localhost:8080/rest-service.json?status=201
 
 ```shell
 magik-server -s status
+
+# or in long form
+
+magik-server --status status
 ```
 
 ## Contributing
