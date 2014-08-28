@@ -21,8 +21,9 @@ Command line options:
 | shorthand | command         | description
 | --------- | --------------- | -------------------------------------------------------------------------- |
 | -d        | --dot           | Show .dot files (hidden files) in directory listings, defaults to false    |
+| -e        | --extensions    | The extensions to use for the default index page, default: html, htm, js   |
 | -h        | --help          | show help text                                                             |
-| -i        | --index         | The index file(s) to use, default searches for index.html, index.htm, index.js, default.html, default.html, default.js, app.html, app.htm, app.js. One file or a comma delimited list |
+| -i        | --index         | The index file(s) to use, default searches for index, default, main and app with the extensions html, htm and js. One file or a comma delimited list |
 |           | --ip            | specify the IP address the server is bound to, default: localhost          |
 | -l        | --listing       | Show directory listing when no suitable file is found, default: true       |
 | -L        | --disable-less  | disable parsing of LESS files, default false                               |
@@ -33,7 +34,7 @@ Command line options:
 | -S        | --disable-sass  | disable parsing of SASS files, default: false                              |
 | -t        | --timeout       | Set the timeout query string parameter or the global timeout in milliseconds, default: magik-timeout / 0 |
 | -v        | --version       | show version number                                                        |
-| -w        | --wizzard       | wizzard which will guide you through all available options                 |
+| -w        | --wizzard       | the startup wizzard will guide you through all available options           |
 
 
 ## Examples

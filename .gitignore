@@ -1,3 +1,10 @@
+.DS_Store
 .idea
+.project
+.sass-cache
+.stage
+.tmp
 bower_components
+build
+coverage
 node_modules
