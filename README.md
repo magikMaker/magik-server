@@ -23,13 +23,16 @@ Command line options:
 | -d        | --dot           | Show .dot files (hidden files) in directory listings, defaults to false    |
 | -h        | --help          | show help text                                                             |
 | -i        | --index         | The index file(s) to use, default searches for index.html, index.htm, index.js, default.html, default.html, default.js, app.html, app.htm, app.js. One file or a comma delimited list |
-|           | --ip            | specify the IP address the server is bound to                              |
+|           | --ip            | specify the IP address the server is bound to, default: localhost          |
 | -l        | --listing       | Show directory listing when no suitable file is found, default: true       |
+| -L        | --disable-less  | disable parsing of LESS files, default false                               |
 | -n        | --not-found     | custom 404 page, defaults to 404.html (.htm, .js) in document root         |
 | -p        | --port          | specify port number, defaults to 8080                                      |
 | -r        | --root          | supply the document root, defaults to project root                         |
+| -s        | --status-code   | Set the status code query string parameter, default: magik-status          |
+| -S        | --disable-sass  | disable parsing of SASS files, default: false                              |
 | -v        | --version       | show version number                                                        |
-| -t        | --response-time | Set the response time query string parameter, default: magik-response-time |
+| -t        | --timeout       | Set the timeout query string parameter, default: magik-timeout             |
 
 
 ## Examples
@@ -50,7 +53,7 @@ magik-server -dh
 magik-server --dot --help
 ```
 
-Start the server on port 8080 of localhost
+Start the server on localhost on port 8080
 
 ```shell
 magik-server
@@ -62,12 +65,19 @@ Start the server on port 8090, set the document root to the app folder and set i
 magik-server -p 8090 -r app -i my-app.html
 ```
 
-Set the response time query string parameter to a custom value, so you can make requests that will honour your timeout value (in ms):
+Set the response time query string parameter to a custom value, so you can make requests that will honour your time value (in ms):
 http://localhost:8080/slow-server-response.html?wait=3000
 
 
 ```shell
 magik-server -t wait
+```
+
+Set a custom HTTP response code query string parameter so it can be used in requests:
+http://localhost:8080/rest-service.json?status=201
+
+```shell
+magik-server -s status
 ```
 
 ## Contributing
@@ -78,7 +88,8 @@ Add unit tests for any new or changed functionality. Lint and test your code usi
 
 ## License
 
-Copyright (c) 2014 Bjørn Wikkeling [bjorn.wikkeling.com](http://bjorn.wikkeling.com/)
+Copyright (c) 2014 Bjørn Wikkeling <bjorn@wikkeling.com>
+[bjorn.wikkeling.com](http://bjorn.wikkeling.com/)
 
 Licensed under the MIT license.
 
