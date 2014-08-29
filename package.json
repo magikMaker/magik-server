@@ -10,7 +10,7 @@
         "type": "git",
         "url": "git@github.com:magikMaker/magik-server.git"
     },
-    preferGlobal: true,
+    "preferGlobal": true,
     "keywords": [
         "http",
         "server",
