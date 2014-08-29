@@ -13,6 +13,7 @@ $ magik-server --version
 $ magik-server --help
 ```
 
+![magikServer](http://s29.postimg.org/klcpv3bbb/magik_Server.png)
 
 ## Documentation
 
