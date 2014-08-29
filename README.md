@@ -19,8 +19,8 @@ To display all comman line options use the `-h` or `--help` switch
 
 ```sh
 $ magik-server --help
-
 ```
+
 
 | shorthand | command         | description
 | --------- | --------------- | -------------------------------------------------------------------------- |
