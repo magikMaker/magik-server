@@ -12,7 +12,7 @@ $ npm install -g magik-server
 $ magik-server --help
 ```
 
-![magikServer](http://s29.postimg.org/klcpv3bbb/magik_Server.png)
+![magikServer](http://s22.postimg.org/kde5c9mcx/magik_Server.png)
 
 ## Documentation
 
