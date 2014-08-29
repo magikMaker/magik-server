@@ -1,6 +1,6 @@
 # magik-server
 
-> a simple HTTP server that supports all request methods.
+> a simple HTTP server with some nice magik.
 
 
 ## Getting Started
@@ -9,7 +9,6 @@ Install the module with: `npm install -g magik-server`
 
 ```sh
 $ npm install -g magik-server
-$ magik-server --version
 $ magik-server --help
 ```
 
@@ -45,16 +44,17 @@ Start the server on localhost on port 8080
 ```shell
 magik-server
 ```
-
+<!--
 Start the server using a wizzard to set all available options:
 
 ```shell
 magik-server -w
 
-#OR
+# or in long form
 
 magik-server --wizzard
 ```
+-->
 
 Show help info:
 
@@ -64,20 +64,6 @@ magik-server -h
 # or in long form
 
 magik-server --help
-```
-
-Show help info for a specific command
-
-```sh
-magik-server -d -h
-
-# or in long form
-
-magik-server -dh
-
-# or in long form
-
-magik-server --dot --help
 ```
 
 Start the server on port 8090, set the document root to the app folder and set index to my-app.html
@@ -90,7 +76,9 @@ magik-server -p 8090 -r app -i my-app.html
 magik-server --port 8090 --root app --index my-app.html
 ```
 
-Set the response time query string parameter to a custom value, so you can make requests that will honour your time value (in ms):
+Set the response time query string parameter to a custom value, so you can make
+requests that will honour your time value (in ms):
+default: `magik-timout`
 http://localhost:8080/slow-server-response.html?wait=3000
 
 ```shell
@@ -112,6 +100,7 @@ magik-server --timeout 2000
 ```
 
 Set a custom HTTP response code query string parameter so it can be used in requests:
+default: `magik-status`
 http://localhost:8080/rest-service.json?status=201
 
 ```shell
@@ -120,6 +109,16 @@ magik-server -s status
 # or in long form
 
 magik-server --status status
+```
+
+You can also set a global response status code that will always be returned
+
+```shell
+magik-server -s 202
+
+# or in long form
+
+magik-server --status 202
 ```
 
 ## Contributing
