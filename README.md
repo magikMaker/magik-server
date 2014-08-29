@@ -15,6 +15,9 @@ $ magik-server
 ![magikServer](http://s22.postimg.org/kde5c9mcx/magik_Server.png)
 
 ## Documentation
+
+*WARNING* magikServer is currently not fully functional, only some command line options work, namely: `-h, --ip, -p, -r, -s, -t, -v`
+
 To display all comman line options use the `-h` or `--help` switch
 
 ```sh

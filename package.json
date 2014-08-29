@@ -1,9 +1,10 @@
 {
     "name": "magik-server",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "description": "A simple HTTP server with some nice magik.",
     "main": "lib/magik-server",
     "scripts": {
+        "start": "node ./bin/magik-server",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "repository": {
@@ -11,7 +12,15 @@
         "url": "git@github.com:magikMaker/magik-server.git"
     },
     "preferGlobal": true,
+    "bin": {
+        "magik-server" : "lib/magik-server.js"
+    },
+    "bugs": {
+        "url": "https://github.com/magikMaker/magik-server/issues"
+    },
     "keywords": [
+        "cli",
+        "command",
         "http",
         "server",
         "development",
