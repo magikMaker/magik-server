@@ -18,8 +18,8 @@ $ magik-server
 To display all comman line options use the `-h` or `--help` switch
 
 ```sh
-$ npm install -g magik-server
 $ magik-server --help
+
 ```
 
 | shorthand | command         | description
