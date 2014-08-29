@@ -2,64 +2,82 @@
 <html>
 <head>
     <title>404 Not Found</title>
-<style>
-    body,
-    html {
-        background-color: #ebebeb;
-        color: #333;
-        font-family: "Helvetica Neue Light", "HelveticaNeue-Light", "Helvetica Neue", Calibri, Helvetica, Arial, Sans-Serif;
-        margin: 0;
-        padding: 0;
-    }
+    <style>
+        html {
+            height: 100%;
+            overflow: hidden;
 
-    h1 {
-        margin: 1rem;
-    }
+        }
 
-    p {
-        margin: 0 1rem;
-    }
+        body {
+            min-height: 100%;
+            position: relative;
+        }
 
-    section {
-        position: relative;
-        z-index: 10;
-    }
+        body,
+        html {
+            background-color: #ebebeb;
+            color: #333;
+            font-family: "Helvetica Neue Light", "HelveticaNeue-Light", "Helvetica Neue", Calibri, Helvetica, Arial, Sans-Serif;
+            margin: 0;
+            padding: 0;
+        }
 
-    footer {
-        bottom: 0;
-        color: #a6a6a6;
-        font-size: 80%;
-        height: 1.5rem;
-        left: 0;
-        line-height: 1.5rem;
-        margin-bottom: 0.5rem;
-        position: absolute;
-        right: 0;
-    }
+        .watermark {
+            bottom: -6rem;
+            color: rgba(254, 254, 254, 0.8);
+            cursor: default;
+            font-size: 30rem;
+            font-weight: bold;
+            xxheight: 19rem;
+            xxline-height: 15rem;
+            opacity: 0.8;
+            position: absolute;
+            right: -0.5rem;
+            text-shadow: -1px -1px 1px rgba(150, 150, 150, 0.2), 1px 1px 1px rgba(150, 150, 150, 0.4);
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            z-index: 0;
+        }
 
-    .watermark {
-        bottom: 0;
-        color: rgba(254, 254, 254, 0.8);
-        font-size: 20rem;
-        font-weight: 900;
-        height: 15rem;
-        line-height: 15rem;
-        opacity: 0.8;
-        position: absolute;
-        right: -5px;
-        text-shadow: -1px -1px 1px rgba(150, 150, 150, 0.2), 1px 1px 1px rgba(150, 150, 150, 0.4);
-        z-index: 0;
-    }
+        section {
+            position: relative;
+            z-index: 10;
+        }
 
-    footer a {
-        color: #a6a6a6;
-        font-weight: bold;
-        text-decoration: none;
-    }
-</style>
+        h1 {
+            margin: 1rem;
+        }
+
+        p {
+            margin: 0 1rem;
+        }
+
+        footer {
+            bottom: 1.5rem;
+            color: #a6a6a6;
+            cursor: default;
+            font-size: 80%;
+            height: 2rem;
+            left: 0;
+            line-height: 2rem;
+            position: absolute;
+            right: 0;
+            z-index: 10;
+        }
+
+        footer a {
+            color: #a6a6a6;
+            font-weight: bold;
+            text-decoration: none;
+        }
+    </style>
 </head>
 <body>
-<div class="watermark">404</div>
 <section>
     <h1>Not Found</h1>
     <p>The requested URL <code>##URL##</code> was not found on this server.</p>
@@ -69,5 +87,6 @@
         powered by <a target="_blank" href="##LINK##">magik-server</a> ##VERSION##
     </p>
 </footer>
+<span class="watermark">404</span>
 </body>
 </html>
