@@ -16,7 +16,7 @@ $ magik-server
 
 ## Documentation
 
-*WARNING* magikServer is currently not fully functional, only some command line options work, namely: `-h, --ip, -p, -r, -s, -t, -v`
+*WARNING* magikServer is currently not fully functional, only some command line options work, namely: `-e, -h, -i, --ip, -n, -p, -r, -s, -t, -v`
 
 To display all comman line options use the `-h` or `--help` switch
 
