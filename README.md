@@ -5,7 +5,7 @@
 
 ## Getting Started
 
-Install the module with: `npm install -g magik-server`
+Install the module and start the server:
 
 ```sh
 $ npm install -g magik-server
