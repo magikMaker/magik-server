@@ -9,14 +9,18 @@ Install the module with: `npm install -g magik-server`
 
 ```sh
 $ npm install -g magik-server
-$ magik-server --help
+$ magik-server
 ```
 
 ![magikServer](http://s22.postimg.org/kde5c9mcx/magik_Server.png)
 
 ## Documentation
+To display all comman line options use the `-h` or `--help` switch
 
-Command line options:
+```sh
+$ npm install -g magik-server
+$ magik-server --help
+```
 
 | shorthand | command         | description
 | --------- | --------------- | -------------------------------------------------------------------------- |
