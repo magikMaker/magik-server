@@ -55,8 +55,8 @@ $ magik-server --help
 # <a name="command-line-options"></a>Command line options
 In this section all the available command line options are listed.
 
-### <a name="switch-a"></a>IP Address
-## `-a` `--address`
+## <a name="switch-a"></a>IP Address
+### `-a` `--address`
 Set the IP address the server is bound to. Default: localhost
 
 ```sh
@@ -64,7 +64,7 @@ $ magik-server -a 10.1.1.10
 ```
 
 ### <a name="switch--cors"></a>CORS Headers
-## `--cors`
+### `--cors`
 Enable sending of CORS headers.
 
 ```sh
@@ -72,7 +72,7 @@ $ magik-server --cors
 ```
 
 ### <a name="switch-D"></a>no directory listing
-## `-D` `--no-dirs`
+####`-D` `--no-dirs`
 Disable directory listing. By default, when no suitable file is found to serve, a directory listing will be displayed.
 
 ```sh
