@@ -5,7 +5,7 @@
 
 ## Getting Started
 
-Install the module and start the server:
+Install the package (globally) and start the server:
 
 ```sh
 $ npm install -g magik-server
@@ -14,70 +14,22 @@ $ magik-server
 
 ![magikServer](http://s22.postimg.org/kde5c9mcx/magik_Server.png)
 
-## Documentation
+# About
+magik-server is a small webserver that is intended for use during the development
+of front-end applications and websites. There are quite a few configuration options
+that can be set using command line switches, see below.
 
-*WARNING* magikServer is currently not fully functional, only some command line options work, namely: `-e, -h, -i, --ip, -n, -p, -r, -s, -t, -v`
+# Documentation
 
-To display all comman line options use the `-h` or `--help` switch
+To display all command line options use the `-h` or `--help` switch
 
 ```sh
 $ magik-server --help
 ```
 
-Command line options:
+# Command line options
 
-# TODO make into list of paragraphs
-
-| shorthand | command         | description
-| --------- | --------------- | -------------------------------------------------------------------------- |
-| -d        | --dot           | Show .dot files (hidden files) in directory listings, defaults to false    |
-| -e        | --extensions    | The extensions to use for the default index page, default: html, htm, js   |
-| -h        | --help          | show help text                                                             |
-| -i        | --index         | The index file(s) to use, default searches for index, default, main and app with the extensions html, htm and js. One file or a comma delimited list |
-              --no-index        will not automatically send the index file
-|           | --ip            | specify the IP address the server is bound to, default: localhost          |
-| -l        | --listing       | Show directory listing when no suitable file is found, default: true       |
-| -L        | --disable-less  | disable parsing of LESS files, default false                               |
-| -n        | --not-found     | custom 404 page, defaults to 404.html (.htm, .js) in document root         |
-
-
-| -p        | --port          | specify port number, defaults to 8080                                      |
-| -r        | --root          | supply the document root, defaults to project root                         |
-| -s        | --status-code   | Set the status code query string parameter or the global status code by supplying it , default: magik-status |
-| -S        | --disable-sass  | disable parsing of SASS files, default: false                              |
-| -t        | --timeout       | Set the timeout query string parameter or the global timeout in milliseconds, default: magik-timeout / 0 |
-| -v        | --version       | show version number                                                        |
-| -w        | --wizzard       | the startup wizzard will guide you through all available options           |
-
-NEW OPTIONS:
-log file
--a  --address      the IP address, default: localhost
-    --auth         basic authentication user:pass
--c  --cors         enable Cross Origin Resource Sharing (default: false)
-    --livereload   enable livereload for the index page or supply a comma delimited list with pages to add LR
--o  --open         open the default browser after starting the server
--t  --responsetime
--z  --gzip         enable gzip (default: false)
-                   write log to file (error.log and access.log)
-
--- SSL
-    --ssl          Enable https.
-    --cert         Path to ssl cert file (default: cert.pem).
-    --key          Path to ssl key file (default: key.pem).
-
--- parsers
--C --coffee --no-coffee
--J --jade   --no-jade
--L --less   --no-less
--S --sass   --no-sass
--Y --stylus --no-stylus
-
-DESCRIPTION
-- explain how to start locally
-- add to description that it is a dev server
-
-
-## Examples
+# Examples
 
 Start the server on localhost on port 8080
 

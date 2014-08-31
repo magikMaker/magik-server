@@ -4,6 +4,7 @@
 .sass-cache
 .stage
 .tmp
+app
 bower_components
 build
 coverage
