@@ -25,7 +25,7 @@ Also there's the possibility to influence server responses using [query string p
   - [Command line switches](#command-line-options)
     - [-a](#switch-a)
     - [--cors](#switch--cors)
-    - [-D](#switch-D)
+    - [-D](#no-directory-listing)
     - [-e](#switch-e)
     - [-h](#switch-h)
     - [-H](#switch-H)
