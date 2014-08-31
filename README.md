@@ -172,18 +172,14 @@ $ magik-server -v
 ```
 
 # <a name="query-string-parameters"></a> Query String Parameters
-magikServer allows you to use query string parameters to change certain behaviours.
-At this moment you can use these:
+magikServer allows you to use query string parameters to change certain behaviours. At this moment you can use these:
 
 `magik-status`
-Sets the HTTP response status code for this request. That means, the response
-is certain to have the supplied status code. You can also change the name of the
-parameter during startup, using the `-s` switch. See also [`-s`](#switch-s)
+Sets the HTTP response status code for this request. That means, the response is certain to have the supplied status code. You can also change the name of the parameter during startup, using the `-s` switch.
+See also [`-s`](#switch-s)
 
 `magik-time`
-Sets the response time for this request. That means that the response will wait
-at least the supplied amount of milliseconds before it is send. You can also
-change the name of the parameter during startup, using the `-t` switch.
+Sets the response time for this request. That means that the response will wait at least the supplied amount of milliseconds before it is send. You can also change the name of the parameter during startup, using the `-t` switch.
 See also [`-t`](#switch-t).
 
 # <a name="examples"></a>Examples
