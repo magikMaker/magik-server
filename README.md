@@ -5,7 +5,7 @@
 
 ## Getting Started
 
-Install the module and start the server:
+Install the package (globally) and start the server:
 
 ```sh
 $ npm install -g magik-server
@@ -14,119 +14,200 @@ $ magik-server
 
 ![magikServer](http://s22.postimg.org/kde5c9mcx/magik_Server.png)
 
-## Documentation
+# About
+magik-server is a small webserver that is intended for use during the development of front-end web applications and websites. There are quite a few configuration options that can be set using command line switches, see below.
+Also there's the possibility to influence server responses using [query string parameters](#query-string-params).
 
-*WARNING* magikServer is currently not fully functional, only some command line options work, namely: `-e, -h, -i, --ip, -n, -p, -r, -s, -t, -v`
+# Documentation
 
-To display all comman line options use the `-h` or `--help` switch
+To display all command line options use the `-h` or `--help` switch
 
 ```sh
 $ magik-server --help
 ```
 
-Command line options:
+# Command line options
+In this section all the available command line options are listed.
 
-| shorthand | command         | description
-| --------- | --------------- | -------------------------------------------------------------------------- |
-| -d        | --dot           | Show .dot files (hidden files) in directory listings, defaults to false    |
-| -e        | --extensions    | The extensions to use for the default index page, default: html, htm, js   |
-| -h        | --help          | show help text                                                             |
-| -i        | --index         | The index file(s) to use, default searches for index, default, main and app with the extensions html, htm and js. One file or a comma delimited list |
-|           | --ip            | specify the IP address the server is bound to, default: localhost          |
-| -l        | --listing       | Show directory listing when no suitable file is found, default: true       |
-| -L        | --disable-less  | disable parsing of LESS files, default false                               |
-| -n        | --not-found     | custom 404 page, defaults to 404.html (.htm, .js) in document root         |
-| -p        | --port          | specify port number, defaults to 8080                                      |
-| -r        | --root          | supply the document root, defaults to project root                         |
-| -s        | --status-code   | Set the status code query string parameter or the global status code by supplying it , default: magik-status |
-| -S        | --disable-sass  | disable parsing of SASS files, default: false                              |
-| -t        | --timeout       | Set the timeout query string parameter or the global timeout in milliseconds, default: magik-timeout / 0 |
-| -v        | --version       | show version number                                                        |
-| -w        | --wizzard       | the startup wizzard will guide you through all available options           |
+### IP Address
+## `-a` `--address`
+Set the IP address the server is bound to. Default: localhost
 
+```sh
+$ magik-server -a 10.1.1.10
+```
 
-## Examples
+### CORS Headers
+## `--cors`
+Enable sending of CORS headers.
+
+```sh
+$ magik-server --cors
+```
+
+### no directory listing
+## `-D` `--no-dirs`
+Disable directory listing. By default, when no suitable file is found to serve, a directory listing will be displayed.
+
+```sh
+$ magik-server -D
+```
+
+### extension for the default index
+## `-e` `--extensions`
+Adds one or more extensions to use to look up the default index page. By default magikServer looks for: `html, htm, js`.
+
+```sh
+# add one extension
+$ magik-server -e coffee
+
+# add more than one extension
+$ magik-server -e coffee, jade, styl
+```
+
+### Help
+## `-h` `--help`
+Displays a list of all available command line options
+
+### show hidden files
+## `-H` `--hidden`
+Enables the display of hidden files. By default, files starting with a dot are hidden in directory listings, use this switch to show them.
+
+### index file(s)
+## `-i` `--index`
+Adds one or more files that will be used as an index page. By default magikServer looks for files with these names in the document root, `index, default, main, app`.
+More files can be added as a comma delimeted list:
+
+```shell
+$ magik-server -i my-index, my-app, my-other-index
+```
+
+### custom 404 page
+## `-n` `--not-found`
+Adds the path to a custom 404 page. This path is relative to the document root.
+
+```sh
+$ magik-server -n error-pages/404.html
+```
+
+### open browser
+## `-o` `--open`
+Automagically open the standard system web browser, after the server has started.
+
+### port number
+## `-p` `--port`
+Sets the port number you wish to use for this server instance. If the port number is already in use, the next available port will be automagically selectd.
+The default port is 8080
+
+```shell
+$ magik-server -p 8090
+```
+
+### document root
+## `-r` `--root`
+Sets the document root. Files from this folder will be served as if they are on `/` in the browser.
+
+```shell
+$ magik-server -r app
+```
+
+### HTTP response status code
+## <a name="switch-s"></a>`-s` `--statusCode`
+Sets the HTTP response code globally. Every response will have this status code. You may also force response codes by using a [query string parameter](#query-string-parameters). The default query string parameter is magik-status, but you can also change this to any URL save string.
+
+```sh
+$ magik-server -s 201
+$ magik-server -s my-status-param
+```
+
+### <a name="switch-t"></a> response time
+## `-t` `--time`
+Sets the response time globally in milliseconds. Every reponse will take (at least) this amount of time. You may also force response times by using a [query string parameter](#query-string-parameters). The default query string parameter is magik-time, but you can also change this to any URL save string.
+
+```sh
+$ magik-server -t 3000
+$ magik-server -t my-time-param
+```
+
+### character encoding
+## `-u` `--encoding`
+Sets the default character encoding of the files served. This defaults to UTF-8 and usually doesn't have to be changed.
+
+```sh
+$ magik-server -u cp-1252
+```
+
+### version information
+## `-v` `--version`
+Displays version information of magik-server
+
+```sh
+$ magik-server -v
+```
+
+# <a name="query-string-parameters"></a> Query String Parameters
+magikServer allows you to use query string parameters to change certain behaviours.
+At this moment you can use these:
+
+## `magik-status`
+Sets the HTTP response status code for this request. That means, the response
+is certain to have the supplied status code. You can also change the name of the
+parameter during startup, using the `-s` switch. See also [`-s`](#switch-s)
+
+## `magik-time`
+Sets the response time for this request. That means that the response will wait
+at least the supplied amount of milliseconds before it is send. You can also
+change the name of the parameter during startup, using the `-t` switch.
+See also [`-t`](#switch-t).
+
+# Examples
+Below you'll find a couple of commonly used ways to start up magik-server.
 
 Start the server on localhost on port 8080
 
 ```shell
-magik-server
+$ magik-server
 ```
-<!--
-Start the server using a wizzard to set all available options:
-
-```shell
-magik-server -w
-
-# or in long form
-
-magik-server --wizzard
-```
--->
 
 Show help info:
 
 ```shell
-magik-server -h
-
-# or in long form
-
-magik-server --help
+$ magik-server -h
 ```
 
 Start the server on port 8090, set the document root to the app folder and set index to my-app.html
 
 ```shell
-magik-server -p 8090 -r app -i my-app.html
-
-# or in long form
-
-magik-server --port 8090 --root app --index my-app.html
+$ magik-server -p 8090 -r app -i my-app.html
 ```
 
-Set the response time query string parameter to a custom value, so you can make
-requests that will honour your time value (in ms):
-default: `magik-timout`
-http://localhost:8080/slow-server-response.html?wait=3000
+Set the [response time query string parameter](#query-string-parameters) to a
+custom value, so you can make requests that will honour the set time value (in ms),
+like this one:
+`http://localhost:8080/slow-server-response.html?wait=3000`
 
 ```shell
-magik-server -t wait
-
-# or in long form
-
-magik-server --timeout wait
+$ magik-server -t wait
 ```
 
-You can also set a global timeout for all requests by supplying an integer value
+You can also set a global response time that will used for all responses
 
 ```shell
-magik-server -t 2000
-
-# or in long form
-
-magik-server --timeout 2000
+magik-server -t 3000
 ```
 
-Set a custom HTTP response code query string parameter so it can be used in requests:
-default: `magik-status`
-http://localhost:8080/rest-service.json?status=201
+Set a custom HTTP response code [query string parameter](#query-string-parameters)
+so it can be used in requests like this one:
+`http://localhost:8080/rest-service.json?status=201`
 
 ```shell
-magik-server -s status
-
-# or in long form
-
-magik-server --status status
+$ magik-server -s status
 ```
 
 You can also set a global response status code that will always be returned
 
 ```shell
-magik-server -s 202
-
-# or in long form
-
-magik-server --status 202
+$ magik-server -s 202
 ```
 
 ## Contributing
@@ -147,3 +228,15 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+                              _  _     _____
+                             (_)| |   /  ___|
+     _ __ ___    __ _   __ _  _ | | __\ `--.   ___  _ __ __   __  ___  _ __
+    | '_ ` _ \  / _` | / _` || || |/ / `--. \ / _ \| '__|\ \ / / / _ \| '__|
+    | | | | | || (_| || (_| || ||   < /\__/ /|  __/| |    \ V / |  __/| |
+    |_| |_| |_| \__,_| \__, ||_||_|\_\\____/  \___||_|     \_/   \___||_|
+                        __/ |
+                       |___/
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
