@@ -1,20 +1,20 @@
 {
   "name": "magik-server",
-  "version": "0.0.6",
+  "version": "0.0.8",
   "description": "A simple HTTP server with some nice magik.",
   "main": "lib/magik-server",
   "scripts": {
     "start": "node ./bin/magik-server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-    "homepage": "https://github.com/magikMaker/magik-server",
+  "homepage": "https://github.com/magikMaker/magik-server",
   "repository": {
     "type": "git",
     "url": "git@github.com:magikMaker/magik-server.git"
   },
   "preferGlobal": true,
   "bin": {
-    "magik-server": "lib/magik-server.js"
+    "magik-server": "/magik-server.js"
   },
   "bugs": {
     "url": "https://github.com/magikMaker/magik-server/issues"
@@ -31,19 +31,31 @@
     "code",
     "method"
   ],
+  "engines": {
+    "npm": ">=0.6.0"
+  },
+  "engineStrict": true,
   "author": "Bjørn Wikkeling",
   "license": "MIT",
   "readmeFilename": "README.md",
   "dependencies": {
     "colors": "^0.6.2",
     "yargs": "^1.3.1",
-    "mmmagic": "^0.3.8",
     "pad": "0.0.5",
     "bytes": "^1.0.0",
     "ansi": "^0.3.0",
     "inquirer": "^0.6.0",
     "ascii-art": "0.0.2-alpha",
-    "node-sass": "^0.9.3"
+    "node-sass": "^0.9.3",
+    "opener": "^1.4.0",
+    "portfinder": "^0.2.1",
+    "mime": "^1.2.11",
+    "coffee-script": "^1.8.0",
+    "jade": "^1.5.0",
+    "stylus": "^0.48.1",
+    "less-middleware": "^1.0.4",
+    "tiny-lr": "^0.1.1",
+    "ent": "^2.0.0"
   },
   "devDependencies": {
     "grunt": "^0.4.5",
