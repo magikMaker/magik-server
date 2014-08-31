@@ -16,7 +16,7 @@ $ magik-server
 
 # About
 magik-server is a small webserver that is intended for use during the development
-of front-end applications and websites. There are quite a few configuration options
+of front-end web applications and websites. There are quite a few configuration options
 that can be set using command line switches, see below.
 
 # Documentation
@@ -29,27 +29,39 @@ $ magik-server --help
 
 # Command line options
 
-## `-a` `--address` IP Address
+## `-a` `--address`
+#### IP Address
 Set the IP address the server is bound to. Default: localhost
 
-## `--cors` CORS Headers
+```sh
+$ magik-server -a 10.1.1.10
+```
+
+## `--cors`
+#### CORS Headers
 Enable sending of CORS headers.
 
-## `-D` `--no-dirs` no directory listing
-Disable directory listing. By default, when no suitable file is found to serve,
-a directory listing will be displayed.
+```sh
+$ magik-server --cors
+```
 
-## `-e` `--extensions` extensions for default index
-Adds one or more extensions to use to look up the default index page. By
-default magikServer looks for: `html, htm, js`.
+## `-D` `--no-dirs`
+#### no directory listing
+Disable directory listing. By default, when no suitable file is found to serve, a directory listing will be displayed.
+
+```sh
+$ magik-server -D
+```
+
+## `-e` `--extensions`
+#### extension for the default index
+Adds one or more extensions to use to look up the default index page. By default magikServer looks for: `html, htm, js`.
 
 ```sh
 # add one extension
-
 $ magik-server -e coffee
 
 # add more than one extension
-
 $ magik-server -e coffee, jade, styl
 ```
 
