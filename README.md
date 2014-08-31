@@ -16,7 +16,7 @@ $ magik-server
 
 # About
 magik-server is a small webserver that is intended for use during the development of front-end web applications and websites. There are quite a few configuration options that can be set using command line switches, see below.
-Also there's the possibility to influence server responses using [query string parameters](#query-string-params).
+Also there's the possibility to influence server responses using [query string parameters](#query-string-parameters).
 
 # Documentation
 
