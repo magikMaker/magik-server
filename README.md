@@ -37,7 +37,7 @@ Set the IP address the server is bound to. Default: localhost
 $ magik-server -a 10.1.1.10
 ```
 
-## `--cors`
+### `--cors`
 #### CORS Headers
 Enable sending of CORS headers.
 
@@ -45,7 +45,7 @@ Enable sending of CORS headers.
 $ magik-server --cors
 ```
 
-## `-D` `--no-dirs`
+### `-D` `--no-dirs`
 #### no directory listing
 Disable directory listing. By default, when no suitable file is found to serve, a directory listing will be displayed.
 
