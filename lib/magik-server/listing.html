@@ -2,9 +2,91 @@
 <html>
 <head>
     <title>Directory Listing not yet implemented</title>
+    <style>
+        html {
+            height: 100%;
+            overflow: hidden;
+
+        }
+
+        body {
+            min-height: 100%;
+            position: relative;
+        }
+
+        body,
+        html {
+            background-color: #ebebeb;
+            color: #333;
+            font-family: "Helvetica Neue Light", "HelveticaNeue-Light", "Helvetica Neue", Calibri, Helvetica, Arial, Sans-Serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .watermark {
+            bottom: -6rem;
+            color: rgba(254, 254, 254, 0.8);
+            cursor: default;
+            font-size: 30rem;
+            font-weight: bold;
+            xxheight: 19rem;
+            xxline-height: 15rem;
+            opacity: 0.8;
+            position: absolute;
+            right: -0.5rem;
+            text-shadow: -1px -1px 1px rgba(150, 150, 150, 0.2), 1px 1px 1px rgba(150, 150, 150, 0.4);
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            z-index: 0;
+        }
+
+        section {
+            position: relative;
+            z-index: 10;
+        }
+
+        h1 {
+            margin: 1rem;
+        }
+
+        p {
+            margin: 0 1rem;
+        }
+
+        footer {
+            bottom: 1.5rem;
+            color: #a6a6a6;
+            cursor: default;
+            font-size: 80%;
+            height: 2rem;
+            left: 0;
+            line-height: 2rem;
+            position: absolute;
+            right: 0;
+            z-index: 10;
+        }
+
+        footer a {
+            color: #a6a6a6;
+            font-weight: bold;
+            text-decoration: none;
+        }
+    </style>
 </head>
 <body>
-<h1>Directory Listing</h1>
-<p>The directory listing is not yet implemented.</p>
+<section>
+    <h1>Directory Listing</h1>
+    ##LISTING##
+</section>
+<footer>
+    <p>
+        powered by <a target="_blank" href="##LINK##">magik-server</a> v.##VERSION##
+    </p>
+</footer>
+<span class="watermark">index</span>
 </body>
 </html>
