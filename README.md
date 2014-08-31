@@ -72,15 +72,15 @@ $ magik-server --cors
 ```
 
 ### <a name="switch-D"></a>no directory listing
-####`-D` `--no-dirs`
+`-D` `--no-dirs`
 Disable directory listing. By default, when no suitable file is found to serve, a directory listing will be displayed.
 
 ```sh
 $ magik-server -D
 ```
 
-### <a name="switch-e"></a>extension for the default index
-## `-e` `--extensions`
+#### <a name="switch-e"></a>extension for the default index
+`-e` `--extensions`
 Adds one or more extensions to use to look up the default index page. By default magikServer looks for: `html, htm, js`.
 
 ```sh
