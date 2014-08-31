@@ -27,33 +27,34 @@ $ magik-server --help
 ```
 
 # Command line options
+In this section all the available command line options are listed.
 
+### IP Address
 ## `-a` `--address`
-#### IP Address
 Set the IP address the server is bound to. Default: localhost
 
 ```sh
 $ magik-server -a 10.1.1.10
 ```
 
+### CORS Headers
 ## `--cors`
-#### CORS Headers
 Enable sending of CORS headers.
 
 ```sh
 $ magik-server --cors
 ```
 
+### no directory listing
 ## `-D` `--no-dirs`
-#### no directory listing
 Disable directory listing. By default, when no suitable file is found to serve, a directory listing will be displayed.
 
 ```sh
 $ magik-server -D
 ```
 
+### extension for the default index
 ## `-e` `--extensions`
-#### extension for the default index
 Adds one or more extensions to use to look up the default index page. By default magikServer looks for: `html, htm, js`.
 
 ```sh
@@ -64,15 +65,16 @@ $ magik-server -e coffee
 $ magik-server -e coffee, jade, styl
 ```
 
+### Help
 ## `-h` `--help`
 Displays a list of all available command line options
 
+### show hidden files
 ## `-H` `--hidden`
-#### show hidden files
 Enables the display of hidden files. By default, files starting with a dot are hidden in directory listings, use this switch to show them.
 
+### index file(s)
 ## `-i` `--index`
-#### index file(s)
 Adds one or more files that will be used as an index page. By default magikServer looks for files with these names in the document root, `index, default, main, app`.
 More files can be added as a comma delimeted list:
 
@@ -80,20 +82,20 @@ More files can be added as a comma delimeted list:
 $ magik-server -i my-index, my-app, my-other-index
 ```
 
+### custom 404 page
 ## `-n` `--not-found`
-#### custom 404 page
 Adds the path to a custom 404 page. This path is relative to the document root.
 
 ```sh
 $ magik-server -n error-pages/404.html
 ```
 
+### open browser
 ## `-o` `--open`
-#### open browser
 Automagically open the standard system web browser, after the server has started.
 
+### port number
 ## `-p` `--port`
-#### port number
 Sets the port number you wish to use for this server instance. If the port number is already in use, the next available port will be automagically selectd.
 The default port is 8080
 
@@ -101,16 +103,16 @@ The default port is 8080
 $ magik-server -p 8090
 ```
 
+### document root
 ## `-r` `--root`
-#### document root
 Sets the document root. Files from this folder will be served as if they are on `/` in the browser.
 
 ```shell
 $ magik-server -r app
 ```
 
+### HTTP response status code
 ## <a name="switch-s"></a>`-s` `--statusCode`
-#### HTTP response status code
 Sets the HTTP response code globally. Every response will have this status code. You may also force response codes by using a [query string parameter](#query-string-parameters). The default query string parameter is magik-status, but you can also change this to any URL save string.
 
 ```sh
@@ -118,8 +120,8 @@ $ magik-server -s 201
 $ magik-server -s my-status-param
 ```
 
-## <a name="switch-t"></a>`-t` `--time`
-#### response time
+### <a name="switch-t"></a> response time
+## `-t` `--time`
 Sets the response time globally in milliseconds. Every reponse will take (at least) this amount of time. You may also force response times by using a [query string parameter](#query-string-parameters). The default query string parameter is magik-time, but you can also change this to any URL save string.
 
 ```sh
@@ -127,16 +129,16 @@ $ magik-server -t 3000
 $ magik-server -t my-time-param
 ```
 
+### character encoding
 ## `-u` `--encoding`
-#### character encoding
 Sets the default character encoding of the files served. This defaults to UTF-8 and usually doesn't have to be changed.
 
 ```sh
 $ magik-server -u cp-1252
 ```
 
+### version information
 ## `-v` `--version`
-#### version information
 Displays version information of magik-server
 
 ```sh
