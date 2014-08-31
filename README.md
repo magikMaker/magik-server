@@ -55,8 +55,8 @@ $ magik-server --help
 # <a name="command-line-options"></a>Command line options
 In this section all the available command line options are listed.
 
-## <a name="switch-a"></a>IP Address
-### `-a` `--address`
+### <a name="switch-a"></a>IP Address
+`-a` `--address`
 Set the IP address the server is bound to. Default: localhost
 
 ```sh
@@ -64,7 +64,7 @@ $ magik-server -a 10.1.1.10
 ```
 
 ### <a name="switch--cors"></a>CORS Headers
-### `--cors`
+`--cors`
 Enable sending of CORS headers.
 
 ```sh
@@ -79,7 +79,7 @@ Disable directory listing. By default, when no suitable file is found to serve, 
 $ magik-server -D
 ```
 
-#### <a name="switch-e"></a>extension for the default index
+### <a name="switch-e"></a>extension for the default index
 `-e` `--extensions`
 Adds one or more extensions to use to look up the default index page. By default magikServer looks for: `html, htm, js`.
 
@@ -92,15 +92,15 @@ $ magik-server -e coffee, jade, styl
 ```
 
 ### <a name="switch-h"></a>Help
-## `-h` `--help`
+`-h` `--help`
 Displays a list of all available command line options
 
 ### <a name="switch-H"></a>show hidden files
-## `-H` `--hidden`
+`-H` `--hidden`
 Enables the display of hidden files. By default, files starting with a dot are hidden in directory listings, use this switch to show them.
 
 ### <a name="switch-i"></a>index file(s)
-## `-i` `--index`
+`-i` `--index`
 Adds one or more files that will be used as an index page. By default magikServer looks for files with these names in the document root, `index, default, main, app`.
 More files can be added as a comma delimeted list:
 
@@ -109,7 +109,7 @@ $ magik-server -i my-index, my-app, my-other-index
 ```
 
 ### <a name="switch-n"></a>custom 404 page
-## `-n` `--not-found`
+`-n` `--not-found`
 Adds the path to a custom 404 page. This path is relative to the document root.
 
 ```sh
@@ -117,11 +117,11 @@ $ magik-server -n error-pages/404.html
 ```
 
 ### <a name="switch-o"></a>open browser
-## `-o` `--open`
+`-o` `--open`
 Automagically open the standard system web browser, after the server has started.
 
 ### <a name="switch-p"></a>port number
-## `-p` `--port`
+`-p` `--port`
 Sets the port number you wish to use for this server instance. If the port number is already in use, the next available port will be automagically selectd.
 The default port is 8080
 
@@ -130,7 +130,7 @@ $ magik-server -p 8090
 ```
 
 ### <a name="switch-r"></a>document root
-## `-r` `--root`
+`-r` `--root`
 Sets the document root. Files from this folder will be served as if they are on `/` in the browser.
 
 ```shell
@@ -138,7 +138,7 @@ $ magik-server -r app
 ```
 
 ### <a name="switch-s"></a>HTTP response status code
-## `-s` `--statusCode`
+`-s` `--statusCode`
 Sets the HTTP response code globally. Every response will have this status code. You may also force response codes by using a [query string parameter](#query-string-parameters). The default query string parameter is magik-status, but you can also change this to any URL save string.
 
 ```sh
@@ -147,7 +147,7 @@ $ magik-server -s my-status-param
 ```
 
 ### <a name="switch-t"></a> response time
-## `-t` `--time`
+`-t` `--time`
 Sets the response time globally in milliseconds. Every reponse will take (at least) this amount of time. You may also force response times by using a [query string parameter](#query-string-parameters). The default query string parameter is magik-time, but you can also change this to any URL save string.
 
 ```sh
@@ -156,7 +156,7 @@ $ magik-server -t my-time-param
 ```
 
 ### <a name="switch-u"></a>character encoding
-## `-u` `--encoding`
+`-u` `--encoding`
 Sets the default character encoding of the files served. This defaults to UTF-8 and usually doesn't have to be changed.
 
 ```sh
@@ -164,7 +164,7 @@ $ magik-server -u cp-1252
 ```
 
 ### <a name="switch-v"></a>version information
-## `-v` `--version`
+`-v` `--version`
 Displays version information of magik-server
 
 ```sh
@@ -175,12 +175,12 @@ $ magik-server -v
 magikServer allows you to use query string parameters to change certain behaviours.
 At this moment you can use these:
 
-## `magik-status`
+`magik-status`
 Sets the HTTP response status code for this request. That means, the response
 is certain to have the supplied status code. You can also change the name of the
 parameter during startup, using the `-s` switch. See also [`-s`](#switch-s)
 
-## `magik-time`
+`magik-time`
 Sets the response time for this request. That means that the response will wait
 at least the supplied amount of milliseconds before it is send. You can also
 change the name of the parameter during startup, using the `-t` switch.
@@ -236,13 +236,13 @@ You can also set a global response status code that will always be returned
 $ magik-server -s 202
 ```
 
-## <a name="contributing"></a>Contributing
+# <a name="contributing"></a>Contributing
 
 In lieu of a formal styleguide, take care to maintain the existing coding style.
 Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com).
 
 
-## <a name="license"></a>License
+# <a name="license"></a>License
 
 Copyright (c) 2014 Bjørn Wikkeling <bjorn@wikkeling.com>
 [bjorn.wikkeling.com](http://bjorn.wikkeling.com/)
