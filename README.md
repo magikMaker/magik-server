@@ -3,7 +3,7 @@
 > a simple HTTP server with some nice magik.
 
 
-## Getting Started
+## <a name="getting-started"></a>Getting Started
 
 Install the package (globally) and start the server:
 
@@ -14,11 +14,37 @@ $ magik-server
 
 ![magikServer](http://s22.postimg.org/kde5c9mcx/magik_Server.png)
 
-# About
+# <a name="about"></a>About
 magik-server is a small webserver that is intended for use during the development of front-end web applications and websites. There are quite a few configuration options that can be set using command line switches, see below.
-Also there's the possibility to influence server responses using [query string parameters](#query-string-params).
+Also there's the possibility to influence server responses using [query string parameters](#query-string-parameters).
 
-# Documentation
+# <a name="index"></a>Index
+- [Getting started](#getting-started)
+- [About](#about)
+- [Documentation](#documentation)
+  - [Command line switches](#command-line-options)
+    - [-a](#switch-a)
+    - [--cors](#switch--cors)
+    - [-D](#no-directory-listing)
+    - [-e](#switch-e)
+    - [-h](#switch-h)
+    - [-H](#switch-H)
+    - [-i](#switch-i)
+    - [-n](#switch-n)
+    - [-o](#switch-o)
+    - [-p](#switch-p)
+    - [-r](#switch-r)
+    - [-s](#switch-s)
+    - [-t](#switch-t)
+    - [-u](#switch-u)
+    - [-v](#switch-v)
+  - [Query String Parameters](#query-string-parameters)
+- [Examples](#examples)
+- [Contributin](#contributing)
+- [License](#license)
+
+
+# <a name="documentation"></a>Documentation
 
 To display all command line options use the `-h` or `--help` switch
 
@@ -26,35 +52,35 @@ To display all command line options use the `-h` or `--help` switch
 $ magik-server --help
 ```
 
-# Command line options
+# <a name="command-line-options"></a>Command line options
 In this section all the available command line options are listed.
 
-### IP Address
-## `-a` `--address`
+### <a name="switch-a"></a>IP Address
+`-a` `--address`
 Set the IP address the server is bound to. Default: localhost
 
 ```sh
 $ magik-server -a 10.1.1.10
 ```
 
-### CORS Headers
-## `--cors`
+### <a name="switch--cors"></a>CORS Headers
+`--cors`
 Enable sending of CORS headers.
 
 ```sh
 $ magik-server --cors
 ```
 
-### no directory listing
-## `-D` `--no-dirs`
+### <a name="switch-D"></a>no directory listing
+`-D` `--no-dirs`
 Disable directory listing. By default, when no suitable file is found to serve, a directory listing will be displayed.
 
 ```sh
 $ magik-server -D
 ```
 
-### extension for the default index
-## `-e` `--extensions`
+### <a name="switch-e"></a>extension for the default index
+`-e` `--extensions`
 Adds one or more extensions to use to look up the default index page. By default magikServer looks for: `html, htm, js`.
 
 ```sh
@@ -65,16 +91,16 @@ $ magik-server -e coffee
 $ magik-server -e coffee, jade, styl
 ```
 
-### Help
-## `-h` `--help`
+### <a name="switch-h"></a>Help
+`-h` `--help`
 Displays a list of all available command line options
 
-### show hidden files
-## `-H` `--hidden`
+### <a name="switch-H"></a>show hidden files
+`-H` `--hidden`
 Enables the display of hidden files. By default, files starting with a dot are hidden in directory listings, use this switch to show them.
 
-### index file(s)
-## `-i` `--index`
+### <a name="switch-i"></a>index file(s)
+`-i` `--index`
 Adds one or more files that will be used as an index page. By default magikServer looks for files with these names in the document root, `index, default, main, app`.
 More files can be added as a comma delimeted list:
 
@@ -82,20 +108,20 @@ More files can be added as a comma delimeted list:
 $ magik-server -i my-index, my-app, my-other-index
 ```
 
-### custom 404 page
-## `-n` `--not-found`
+### <a name="switch-n"></a>custom 404 page
+`-n` `--not-found`
 Adds the path to a custom 404 page. This path is relative to the document root.
 
 ```sh
 $ magik-server -n error-pages/404.html
 ```
 
-### open browser
-## `-o` `--open`
+### <a name="switch-o"></a>open browser
+`-o` `--open`
 Automagically open the standard system web browser, after the server has started.
 
-### port number
-## `-p` `--port`
+### <a name="switch-p"></a>port number
+`-p` `--port`
 Sets the port number you wish to use for this server instance. If the port number is already in use, the next available port will be automagically selectd.
 The default port is 8080
 
@@ -103,16 +129,16 @@ The default port is 8080
 $ magik-server -p 8090
 ```
 
-### document root
-## `-r` `--root`
+### <a name="switch-r"></a>document root
+`-r` `--root`
 Sets the document root. Files from this folder will be served as if they are on `/` in the browser.
 
 ```shell
 $ magik-server -r app
 ```
 
-### HTTP response status code
-## <a name="switch-s"></a>`-s` `--statusCode`
+### <a name="switch-s"></a>HTTP response status code
+`-s` `--statusCode`
 Sets the HTTP response code globally. Every response will have this status code. You may also force response codes by using a [query string parameter](#query-string-parameters). The default query string parameter is magik-status, but you can also change this to any URL save string.
 
 ```sh
@@ -121,7 +147,7 @@ $ magik-server -s my-status-param
 ```
 
 ### <a name="switch-t"></a> response time
-## `-t` `--time`
+`-t` `--time`
 Sets the response time globally in milliseconds. Every reponse will take (at least) this amount of time. You may also force response times by using a [query string parameter](#query-string-parameters). The default query string parameter is magik-time, but you can also change this to any URL save string.
 
 ```sh
@@ -129,16 +155,16 @@ $ magik-server -t 3000
 $ magik-server -t my-time-param
 ```
 
-### character encoding
-## `-u` `--encoding`
+### <a name="switch-u"></a>character encoding
+`-u` `--encoding`
 Sets the default character encoding of the files served. This defaults to UTF-8 and usually doesn't have to be changed.
 
 ```sh
 $ magik-server -u cp-1252
 ```
 
-### version information
-## `-v` `--version`
+### <a name="switch-v"></a>version information
+`-v` `--version`
 Displays version information of magik-server
 
 ```sh
@@ -146,21 +172,17 @@ $ magik-server -v
 ```
 
 # <a name="query-string-parameters"></a> Query String Parameters
-magikServer allows you to use query string parameters to change certain behaviours.
-At this moment you can use these:
+magikServer allows you to use query string parameters to change certain behaviours. At this moment you can use these:
 
-## `magik-status`
-Sets the HTTP response status code for this request. That means, the response
-is certain to have the supplied status code. You can also change the name of the
-parameter during startup, using the `-s` switch. See also [`-s`](#switch-s)
+`magik-status`
+Sets the HTTP response status code for this request. That means, the response is certain to have the supplied status code. You can also change the name of the parameter during startup, using the `-s` switch.
+See also [`-s`](#switch-s)
 
-## `magik-time`
-Sets the response time for this request. That means that the response will wait
-at least the supplied amount of milliseconds before it is send. You can also
-change the name of the parameter during startup, using the `-t` switch.
+`magik-time`
+Sets the response time for this request. That means that the response will wait at least the supplied amount of milliseconds before it is send. You can also change the name of the parameter during startup, using the `-t` switch.
 See also [`-t`](#switch-t).
 
-# Examples
+# <a name="examples"></a>Examples
 Below you'll find a couple of commonly used ways to start up magik-server.
 
 Start the server on localhost on port 8080
@@ -210,13 +232,13 @@ You can also set a global response status code that will always be returned
 $ magik-server -s 202
 ```
 
-## Contributing
+# <a name="contributing"></a>Contributing
 
 In lieu of a formal styleguide, take care to maintain the existing coding style.
 Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com).
 
 
-## License
+# <a name="license"></a>License
 
 Copyright (c) 2014 Bjørn Wikkeling <bjorn@wikkeling.com>
 [bjorn.wikkeling.com](http://bjorn.wikkeling.com/)
