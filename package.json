@@ -1,6 +1,6 @@
 {
   "name": "magik-server",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "description": "A simple HTTP server with some nice magik.",
   "main": "lib/magik-server.js",
   "scripts": {
