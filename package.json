@@ -9,8 +9,8 @@
   "type": "module",
   "scripts": {
     "start": "node dist/cli/index.js",
-    "dev": "tsup --watch",
-    "build": "tsup",
+    "dev": "node build.js --watch",
+    "build": "node build.js",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
     "lint": "eslint src --ext .js",
     "prepare": "npm run build"
@@ -67,19 +67,10 @@
     "yargs": "^17.7.2"
   },
   "devDependencies": {
+    "esbuild": "^0.19.5",
     "eslint": "^8.51.0",
     "eslint-plugin-jest": "^27.4.2",
-    "jest": "^29.7.0",
-    "tsup": "^7.2.0"
+    "jest": "^29.7.0"
   },
-  "tsup": {
-    "entry": [
-      "src/index.js",
-      "src/cli/index.js"
-    ],
-    "format": ["esm"],
-    "splitting": false,
-    "sourcemap": true,
-    "clean": true
-  }
+  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
 }

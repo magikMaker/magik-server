@@ -4,5 +4,6 @@ export default {
   moduleNameMapper: {
     '^(\\.{1,2}/.*)\\.js$': '$1'
   },
-  testEnvironment: 'node'
+  testEnvironment: 'node',
+  testMatch: ['**/*.test.js']
 };
