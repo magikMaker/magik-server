@@ -344,8 +344,6 @@ class MagikServer {
    */
   logResponse(responseObj) {
     const divider = '-'.repeat(process.stdout.columns || 80);
-    const col1 = 15;
-    const col2 = 10;
     
     const responseString = `response: ${responseObj.httpStatusCode} ${responseObj.fileName || ''}`;
     const realResponseTime = (new Date()).getTime() - responseObj.startTime;

@@ -3,7 +3,6 @@
  * @jest-environment node
  */
 
-import http from 'http';
 import { createServer } from './index.js';
 
 // Mock config for testing

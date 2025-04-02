@@ -11,7 +11,7 @@ import { barva } from 'barva';
 import opener from 'opener';
 import portfinder from 'portfinder';
 import figlet from 'figlet';
-import { createServer } from '../server/server.js';
+import { createServer } from '../server/index.js';
 import { config } from '../server/config.js';
 
 const __filename = fileURLToPath(import.meta.url);
