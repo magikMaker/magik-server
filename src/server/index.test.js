@@ -2,6 +2,7 @@
  * Tests for magik-server
  * @jest-environment node
  */
+import { jest } from '@jest/globals';
 
 // Mock createServer
 const mockServer = {

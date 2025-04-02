@@ -2,6 +2,7 @@
  * Tests for configuration module
  * @jest-environment node
  */
+import { jest } from '@jest/globals';
 
 // Mock yargs
 jest.mock('yargs', () => {
