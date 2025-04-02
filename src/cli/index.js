@@ -6,22 +6,42 @@
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { barva } from 'barva';
-import opener from 'opener';
 import portfinder from 'portfinder';
 import figlet from 'figlet';
 import { createServer } from '../server/index.js';
 import { config } from '../server/config.js';
-import childProcess from 'child_process';
 import fs from 'fs';
-
-// Add this to support opener's dynamic require
-globalThis.require = (mod) => {
-  if (mod === 'child_process') return childProcess;
-  throw new Error(`Cannot require ${mod}`);
-};
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+/**
+ * Simple cross-platform URL opener
+ */
+function openUrl(url) {
+  const { platform } = process;
+  let command;
+
+  switch (platform) {
+    case 'darwin':
+      command = `open "${url}"`;
+      break;
+    case 'win32':
+      command = `start "" "${url}"`;
+      break;
+    default:
+      command = `xdg-open "${url}"`;
+      break;
+  }
+  
+  try {
+    import('child_process').then(cp => {
+      cp.exec(command);
+    });
+  } catch (e) {
+    console.log(barva.yellow(`Could not open browser at ${url}`));
+  }
+}
 
 /**
  * Display a splash screen in the terminal
@@ -91,7 +111,7 @@ function startServer(config) {
   
   server.listen(config.port, config.address, () => {
     if (config.open) {
-      opener(`${config.protocol}://${config.address}:${config.port}`);
+      openUrl(`${config.protocol}://${config.address}:${config.port}`);
     }
     
     displaySplashScreen(config);
