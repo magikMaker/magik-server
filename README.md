@@ -220,7 +220,7 @@ See also [`-s`](#switch-s)
 
 `magik-time`
 Sets the response time for this request. That means that the response will wait
-at least the supplied amount of milliseconds before it is send. You can also
+at least the supplied amount of milliseconds before it is sent. You can also
 change the name of the parameter during startup, using the `-t` switch.
 See also [`-t`](#switch-t).
 
@@ -279,32 +279,17 @@ $ magik-server -s 202
 
 In lieu of a formal styleguide, take care to maintain the existing coding style.
 Add unit tests for any new or changed functionality. Lint and test your code
-using `npm test`.
+using:
+
+```shell
+$ yarn lint
+$ yarn test
+```
 
 
 # <a name="license"></a>License
 
-Copyright (c) 2014 Bjørn Wikkeling <bjorn@wikkeling.com>
-[bjorn.wikkeling.com](http://bjorn.wikkeling.com/)
-
-Licensed under the MIT license.
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of
-this software and associated documentation files (the 'Software'), to deal in
-the Software without restriction, including without limitation the rights to
-use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
-the Software, and to permit persons to whom the Software is furnished to do so,
-subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
-FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
-COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
-IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
-CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+[MIT](./LICENSE)
 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
                               _  _     _____
