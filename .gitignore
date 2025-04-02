@@ -3,3 +3,9 @@ dist
 .idea
 coverage
 .env
+lib/
+tasks/
+Gruntfile.js
+.jshintrc
+test/
+tsup.config.js
