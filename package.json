@@ -7,13 +7,26 @@
     "magik-server": "dist/cli/index.js"
   },
   "type": "module",
+  "files": [
+    "dist",
+    "LICENSE",
+    "README.md"
+  ],
   "scripts": {
+    "build": "node scripts/build.js",
+    "bundle-size": "node scripts/bundle-size.js",
+    "dev": "node scripts/build.js --watch",
+    "lint": "eslint src --ext .js --fix",
+    "major": "yarn preversion && yarn version major && yarn postversion",
+    "minor": "yarn preversion && yarn version minor && yarn postversion",
+    "patch": "yarn preversion && yarn version patch && yarn postversion",
+    "postversion": "git push --tags && yarn npm publish --tag $npm_package_version && git push && echo \"Successfully released version $npm_package_version!\"",
+    "prebuild": "yarn lint && yarn test",
+    "prepare": "npm run build",
+    "prepublishOnly": "yarn lint && yarn test && yarn build",
+    "preversion": "yarn lint && yarn test",
     "start": "node dist/cli/index.js",
-    "dev": "node build.js --watch",
-    "build": "node build.js",
-    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
-    "lint": "eslint src --ext .js",
-    "prepare": "npm run build"
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
   },
   "homepage": "https://github.com/magikMaker/magik-server",
   "repository": {
@@ -52,13 +65,13 @@
     "webserver"
   ],
   "engines": {
-    "node": ">=14.16.0"
+    "node": ">=20"
   },
   "author": "Bjørn Wikkeling",
   "license": "MIT",
   "readmeFilename": "README.md",
   "dependencies": {
-    "barva": "^0.0.3",
+    "barva": "^1.0.0",
     "bytes": "^3.1.2",
     "figlet": "^1.6.0",
     "mime": "^3.0.0",
@@ -66,9 +79,12 @@
     "yargs": "^17.7.2"
   },
   "devDependencies": {
+    "@types/jest": "^29.5.14",
+    "@types/node": "^22.14.0",
     "esbuild": "^0.19.5",
     "eslint": "^8.51.0",
     "eslint-plugin-jest": "^27.4.2",
     "jest": "^29.7.0"
-  }
+  },
+  "packageManager": "yarn@4.8.1"
 }

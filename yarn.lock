@@ -1425,7 +1425,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"barva@npm:^0.0.3":
+"barva@npm:^1.0.0":
   version: 1.0.1
   resolution: "barva@npm:1.0.1"
   checksum: 10c0/1c384553279c1aef0002cd26ac6f558af5841768f2f47793f75a9743b8e62d65d3f4e56fda060fe21ecbe13003f80f5e6493170d2f64faee50d52a6d7e6b6798
@@ -3299,7 +3299,7 @@ __metadata:
   dependencies:
     "@types/jest": "npm:^29.5.14"
     "@types/node": "npm:^22.14.0"
-    barva: "npm:^0.0.3"
+    barva: "npm:^1.0.0"
     bytes: "npm:^3.1.2"
     esbuild: "npm:^0.19.5"
     eslint: "npm:^8.51.0"

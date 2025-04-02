@@ -23,7 +23,7 @@ const buildOptions = {
   entryPoints: ['src/index.js', 'src/cli/index.js'],
   bundle: true,
   platform: 'node',
-  target: 'node14',
+  target: 'node20',
   outdir: 'dist',
   format: 'esm',
   sourcemap: true,
