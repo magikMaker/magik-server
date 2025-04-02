@@ -3,6 +3,6 @@
  * @module magik-server
  */
 
-import { createServer } from './server/server.js';
+import { createServer } from './server/index.js';
 
 export { createServer };

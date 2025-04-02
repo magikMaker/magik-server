@@ -7,4 +7,6 @@ export default defineConfig({
   sourcemap: true,
   clean: true,
   dts: false,
+  outDir: 'dist',
+  publicDir: 'src/assets',
 });
