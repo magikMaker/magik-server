@@ -12,7 +12,7 @@ $ npm install -g magik-server
 $ magik-server
 ```
 
-![magikServer](http://s22.postimg.org/kde5c9mcx/magik_Server.png)
+![magikServer](https://i.postimg.cc/0QhxG6kY/magik-server.png)
 
 # <a name="about"></a>About
 magik-server is a small webserver that is intended for use during the development of front-end web applications and websites. There are quite a few configuration options that can be set using command line switches, see below.
