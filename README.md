@@ -7,8 +7,27 @@
 
 Install the package (globally) and start the server:
 
+### npm
 ```sh
 $ npm install -g magik-server
+$ magik-server
+```
+
+### yarn
+```sh
+$ yarn global add magik-server
+$ magik-server
+```
+
+### pnpm
+```sh
+$ pnpm add -g magik-server
+$ magik-server
+```
+
+### bun
+```sh
+$ bun install -g magik-server
 $ magik-server
 ```
 
@@ -40,7 +59,7 @@ Also there's the possibility to influence server responses using [query string p
     - [-v](#switch-v)
   - [Query String Parameters](#query-string-parameters)
 - [Examples](#examples)
-- [Contributin](#contributing)
+- [Contributing](#contributing)
 - [License](#license)
 
 
@@ -235,7 +254,7 @@ $ magik-server -s 202
 # <a name="contributing"></a>Contributing
 
 In lieu of a formal styleguide, take care to maintain the existing coding style.
-Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com).
+Add unit tests for any new or changed functionality. Lint and test your code using `npm test`.
 
 
 # <a name="license"></a>License
