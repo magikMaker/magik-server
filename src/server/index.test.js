@@ -4,6 +4,9 @@
  */
 import { jest } from '@jest/globals';
 
+// Add Jest types
+/// <reference types="jest" />
+
 // Mock createServer
 const mockServer = {
   server: {
