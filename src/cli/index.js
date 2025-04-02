@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 /**
  * CLI entry point for magik-server
  * @module magik-server/cli
@@ -13,6 +11,14 @@ import portfinder from 'portfinder';
 import figlet from 'figlet';
 import { createServer } from '../server/index.js';
 import { config } from '../server/config.js';
+import childProcess from 'child_process';
+import fs from 'fs';
+
+// Add this to support opener's dynamic require
+globalThis.require = (mod) => {
+  if (mod === 'child_process') return childProcess;
+  throw new Error(`Cannot require ${mod}`);
+};
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -109,13 +115,13 @@ function startServer(config) {
 
 // Get package info and extend config
 const packagePath = path.resolve(__dirname, '../../package.json');
-const packageInfo = await import(packagePath);
+const packageInfo = JSON.parse(fs.readFileSync(packagePath, 'utf8'));
 
 // Enrich config object
-config.pkg = packageInfo.default;
+config.pkg = packageInfo;
 config.protocol = 'http';
-config.version = packageInfo.default.version;
-config.versionInfo = `(v.${packageInfo.default.version})`;
+config.version = packageInfo.version;
+config.versionInfo = `(v.${packageInfo.version})`;
 
 // Check if port and address are available
 try {
