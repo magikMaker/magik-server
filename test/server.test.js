@@ -4,7 +4,7 @@
  */
 
 import http from 'http';
-import { createServer } from '../src/server/server.js';
+import { createServer } from '../src/server/index.js';
 
 // Mock config for testing
 const mockConfig = {
