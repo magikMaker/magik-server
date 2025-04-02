@@ -109,7 +109,7 @@ function startServer(config) {
 
 // Get package info and extend config
 const packagePath = path.resolve(__dirname, '../../package.json');
-const packageInfo = await import(packagePath, { assert: { type: 'json' } });
+const packageInfo = await import(packagePath);
 
 // Enrich config object
 config.pkg = packageInfo.default;
