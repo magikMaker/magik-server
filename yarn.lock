@@ -1490,13 +1490,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"bytes@npm:^3.1.2":
-  version: 3.1.2
-  resolution: "bytes@npm:3.1.2"
-  checksum: 10c0/76d1c43cbd602794ad8ad2ae94095cddeb1de78c5dddaa7005c51af10b0176c69971a6d88e805a90c2b6550d76636e43c40d8427a808b8645ede885de4a0358e
-  languageName: node
-  linkType: hard
-
 "cacache@npm:^19.0.1":
   version: 19.0.1
   resolution: "cacache@npm:19.0.1"
@@ -3291,7 +3284,6 @@ __metadata:
     "@types/jest": "npm:^29.5.14"
     "@types/node": "npm:^22.14.0"
     barva: "npm:^1.0.0"
-    bytes: "npm:^3.1.2"
     esbuild: "npm:^0.19.5"
     eslint: "npm:^8.51.0"
     eslint-plugin-jest: "npm:^27.4.2"
