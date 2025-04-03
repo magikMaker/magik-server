@@ -76,7 +76,7 @@ function findMinifiedFile(pkgName) {
       const distDir = path.join(rootDir, 'dist');
 
       // Try to find a minified ESM file first
-      const esmFile = path.join(distDir, 'index.js');
+      const esmFile = path.join(distDir, 'create-server.js');
       if (fs.existsSync(esmFile)) {
         return esmFile;
       }
@@ -147,10 +147,10 @@ function findMinifiedFile(pkgName) {
 
           // Last resort: look for common patterns
           const commonPatterns = [
-            'dist/index.js',
+            'dist/create-server.js',
             'dist/index.mjs',
             'dist/index.cjs',
-            'index.js',
+            'create-server.js',
           ];
 
           for (const pattern of commonPatterns) {

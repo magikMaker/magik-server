@@ -1,25 +1,8 @@
 export default {
-  collectCoverage: true,
-  collectCoverageFrom: [
-    'src/**/*.js',
-    '!src/__tests__/**'
-  ],
-  coverageDirectory: 'coverage',
-  coverageReporters: ['text', 'lcov'],
-  moduleNameMapper: {
-    '^(\\.{1,2}/.*)\\.js$': '$1'
-  },
+  collectCoverage: false,
   testEnvironment: 'node',
   testPathIgnorePatterns: ['/node_modules/', '/dist/'],
   testMatch: ['**/*.test.js'],
-  transform: {},
-  verbose: true
+  moduleFileExtensions: ['js', 'json', 'node'],
+  transform: {}
 };
-
-
-// /*
-//   testMatch: ['**/src/__tests__/**/*.test.ts'],
-//   collectCoverage: true,
-
-
-

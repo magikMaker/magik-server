@@ -1,12 +1,13 @@
 /**
  * Directory listing functionality for magik-server
- * @module magik-server/directory-listing
+ * @module magik-server/server/directory-listing
  */
 
 import fs from 'fs';
 import path from 'path';
+
+import { bytes, formatDate } from '../utils/';
 import { red } from 'barva';
-import { formatFileSize, formatDate } from '../utils/index.js';
 
 /**
  * Create HTML for directory listing
@@ -58,7 +59,7 @@ export function createDirectoryListing(responseObj, callback) {
             const isDir = stats.isDirectory();
             const fileName = isDir ? file + '/' : file;
             const fileType = isDir ? 'Directory' : 'File';
-            const fileSize = isDir ? '-' : formatFileSize(stats.size);
+            const fileSize = isDir ? '-' : bytes(stats.size);
             const modifiedDate = formatDate(stats.mtime);
 
             resolve({

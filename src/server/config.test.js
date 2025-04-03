@@ -2,54 +2,13 @@
  * Tests for configuration module
  * @jest-environment node
  */
-import {jest} from '@jest/globals';
+import { jest } from '@jest/globals';
 
-// Mock yargs
-jest.mock('yargs', () => {
-  const mockCheck = jest.fn().mockReturnThis();
-
-  const mockYargs = {
-    alias: jest.fn().mockReturnThis(),
-    describe: jest.fn().mockReturnThis(),
-    defaults: jest.fn().mockReturnThis(),
-    boolean: jest.fn().mockReturnThis(),
-    string: jest.fn().mockReturnThis(),
-    config: jest.fn().mockReturnThis(),
-    check: mockCheck,
-    wrap: jest.fn().mockReturnThis(),
-    strict: jest.fn().mockReturnThis(),
-    usage: jest.fn().mockReturnThis(),
-    version: jest.fn().mockReturnThis(),
-    help: jest.fn().mockReturnThis(),
-    showHelpOnFail: jest.fn().mockReturnThis(),
-    example: jest.fn().mockReturnThis(),
-    requiresArg: jest.fn().mockReturnThis(),
-    parse: jest.fn().mockReturnValue({
-      address: 'localhost',
-      port: 8080,
-      extensions: 'html, htm, js',
-      index: 'index, default, main, app',
-      statusCode: null,
-      statusCodeParam: 'magik-status',
-      time: 0,
-      timeParam: 'magik-time',
-      dirs: true,
-      e: ['html', 'htm', 'js'],
-      i: ['index', 'default', 'main', 'app'],
-      p: 8080,
-      s: null,
-      t: 0
-    })
-  };
-
-  return jest.fn(() => mockYargs);
-});
-
-describe('Config', () => {
+// Skip mocking yargs completely for now and just use the validation function directly
+describe('Config validation', () => {
   let validateFn;
 
   beforeEach(() => {
-    jest.resetModules();
     validateFn = function (args) {
       // Show directories?
       if (args.D === true) {
@@ -110,7 +69,7 @@ describe('Config', () => {
     };
   });
 
-  test('should load default configuration', () => {
+  test('should have expected default configuration values', () => {
     // Use mocked config instead of importing
     const config = {
       address: 'localhost',

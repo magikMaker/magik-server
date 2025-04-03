@@ -1,6 +1,6 @@
 /**
  * Configuration options for magik-server
- * @module magik-server/config
+ * @module magik-server/server/config
  */
 
 import yargs from 'yargs';

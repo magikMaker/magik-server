@@ -11,7 +11,7 @@
     "README.md"
   ],
   "scripts": {
-    "build": "node scripts/build.js",
+    "build": "yarn prebuild && node scripts/build.js",
     "bundle-size": "node scripts/bundle-size.js",
     "dev": "node scripts/build.js --watch",
     "lint": "eslint src --ext .js --fix",
@@ -23,8 +23,9 @@
     "prepare": "npm run build",
     "prepublishOnly": "yarn lint && yarn test && yarn build",
     "preversion": "yarn lint && yarn test",
+    "publish:test": "yarn publish --registry http://localhost:4873",
     "start": "node dist/cli/index.js",
-    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest"
   },
   "homepage": "https://github.com/magikMaker/magik-server",
   "repository": {
@@ -75,12 +76,13 @@
     "yargs": "^17.7.2"
   },
   "devDependencies": {
+    "@jest/globals": "^29.7.0",
     "@types/jest": "^29.5.14",
     "@types/node": "^22.14.0",
     "esbuild": "^0.19.5",
     "eslint": "^8.51.0",
     "eslint-plugin-jest": "^27.4.2",
-    "jest": "^29.7.0"
+    "jest-cli": "^29.7.0"
   },
   "packageManager": "yarn@4.8.1"
 }

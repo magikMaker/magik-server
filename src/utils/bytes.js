@@ -1,4 +1,8 @@
 /**
+ * @module magik-server/utils/bytes
+ */
+
+/**
  * Represents the different orders of magnitude of bytes.
  *
  * @constant

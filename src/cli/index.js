@@ -3,13 +3,13 @@
  * @module magik-server/cli
  */
 
+import fs from 'fs';
 import path from 'path';
+import portfinder from 'portfinder';
 import {fileURLToPath} from 'url';
 import {magenta, green, grey, yellow, red} from 'barva';
-import portfinder from 'portfinder';
-import {createServer} from '../server/index.js';
-import {config} from '../server/config.js';
-import fs from 'fs';
+
+import {config, createServer} from '../server';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
