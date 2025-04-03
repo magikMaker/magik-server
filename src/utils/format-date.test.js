@@ -1,3 +1,8 @@
+/**
+ * Tests for format-date functionality
+ * @jest-environment node
+ */
+
 import { formatDate } from './format-date';
 
 describe('formatDate', () => {

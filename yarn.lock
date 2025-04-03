@@ -3094,6 +3094,25 @@ __metadata:
   languageName: node
   linkType: hard
 
+"jest@npm:^29.7.0":
+  version: 29.7.0
+  resolution: "jest@npm:29.7.0"
+  dependencies:
+    "@jest/core": "npm:^29.7.0"
+    "@jest/types": "npm:^29.6.3"
+    import-local: "npm:^3.0.2"
+    jest-cli: "npm:^29.7.0"
+  peerDependencies:
+    node-notifier: ^8.0.1 || ^9.0.0 || ^10.0.0
+  peerDependenciesMeta:
+    node-notifier:
+      optional: true
+  bin:
+    jest: bin/jest.js
+  checksum: 10c0/f40eb8171cf147c617cc6ada49d062fbb03b4da666cb8d39cdbfb739a7d75eea4c3ca150fb072d0d273dce0c753db4d0467d54906ad0293f59c54f9db4a09d8b
+  languageName: node
+  linkType: hard
+
 "js-tokens@npm:^4.0.0":
   version: 4.0.0
   resolution: "js-tokens@npm:4.0.0"
@@ -3269,6 +3288,7 @@ __metadata:
     esbuild: "npm:^0.19.5"
     eslint: "npm:^8.51.0"
     eslint-plugin-jest: "npm:^27.4.2"
+    jest: "npm:^29.7.0"
     jest-cli: "npm:^29.7.0"
     mime: "npm:^3.0.0"
     portfinder: "npm:^1.0.32"

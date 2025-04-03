@@ -1,3 +1,8 @@
+/**
+ * Tests for bytes functionality
+ * @jest-environment node
+ */
+
 import { bytes } from './bytes';
 
 // Non-breaking space constant for clarity in tests

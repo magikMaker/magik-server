@@ -2,7 +2,6 @@
  * Tests for configuration module
  * @jest-environment node
  */
-import { jest } from '@jest/globals';
 
 // Skip mocking yargs completely for now and just use the validation function directly
 describe('Config validation', () => {

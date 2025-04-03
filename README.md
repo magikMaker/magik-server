@@ -289,7 +289,7 @@ $ yarn test
 
 # <a name="license"></a>License
 
-[MIT](./LICENSE)
+[MIT](./LICENSE) © [Bjørn Wikkeling](https://bjorn.wikkeling.com)
 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
                               _  _     _____

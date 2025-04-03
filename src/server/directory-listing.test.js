@@ -1,13 +1,14 @@
 /**
  * Tests for directory listing functionality
+ * @jest-environment node
  */
 
 import { jest } from '@jest/globals';
 import fs from 'fs';
 import path from 'path';
 import { createDirectoryListing } from './directory-listing.js';
-import { bytes, formatDate } from '../utils/index.js';
-import { red } from 'barva';
+// Remove unused imports but keep the modules imported since we're replacing their methods
+// with mocks directly below
 
 // Manual mocks for ES modules
 const mockFs = {
@@ -22,16 +23,8 @@ const mockPath = {
   }
 };
 
-const mockUtils = {
-  bytes: jest.fn(size => `${size} B`),
-  formatDate: jest.fn(date => '2023-01-01 12:00:00')
-};
-
-const mockBarva = {
-  red: jest.fn((...args) => args.join(' '))
-};
-
-// Replace actual modules with mocks
+// We don't need to define these mocks if we're not using them in the tests
+// But they're overridden in the original file so we need to mock them
 fs.readdir = mockFs.readdir;
 fs.stat = mockFs.stat;
 path.join = mockPath.join;
