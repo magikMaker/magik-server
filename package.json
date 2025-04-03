@@ -3,9 +3,7 @@
   "version": "0.0.17",
   "description": "A simple HTTP development server with some nice magik.",
   "main": "dist/index.js",
-  "bin": {
-    "magik-server": "dist/cli/index.js"
-  },
+  "bin": "dist/cli/index.js",
   "type": "module",
   "files": [
     "dist",

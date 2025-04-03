@@ -2165,15 +2165,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"figlet@npm:^1.6.0":
-  version: 1.8.0
-  resolution: "figlet@npm:1.8.0"
-  bin:
-    figlet: bin/index.js
-  checksum: 10c0/65c4eafa489e9c34e01f44c7813c0c90ec41fbf716ba5c48fff6d17290fc0bbe32c278eb1bbc2c1a705f59e77f82eb81f5a6c2f5d5022431f2d6ad90fe19ee26
-  languageName: node
-  linkType: hard
-
 "file-entry-cache@npm:^6.0.1":
   version: 6.0.1
   resolution: "file-entry-cache@npm:6.0.1"
@@ -3304,10 +3295,8 @@ __metadata:
     esbuild: "npm:^0.19.5"
     eslint: "npm:^8.51.0"
     eslint-plugin-jest: "npm:^27.4.2"
-    figlet: "npm:^1.6.0"
     jest: "npm:^29.7.0"
     mime: "npm:^3.0.0"
-    opener: "npm:^1.5.2"
     portfinder: "npm:^1.0.32"
     yargs: "npm:^17.7.2"
   bin:
@@ -3592,15 +3581,6 @@ __metadata:
   dependencies:
     mimic-fn: "npm:^2.1.0"
   checksum: 10c0/ffcef6fbb2692c3c40749f31ea2e22677a876daea92959b8a80b521d95cca7a668c884d8b2045d1d8ee7d56796aa405c405462af112a1477594cc63531baeb8f
-  languageName: node
-  linkType: hard
-
-"opener@npm:^1.5.2":
-  version: 1.5.2
-  resolution: "opener@npm:1.5.2"
-  bin:
-    opener: bin/opener-bin.js
-  checksum: 10c0/dd56256ab0cf796585617bc28e06e058adf09211781e70b264c76a1dbe16e90f868c974e5bf5309c93469157c7d14b89c35dc53fe7293b0e40b4d2f92073bc79
   languageName: node
   linkType: hard
 
