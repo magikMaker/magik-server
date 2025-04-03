@@ -7,7 +7,7 @@ import path from 'path';
 import {fileURLToPath} from 'url';
 import {magenta, green, grey, yellow, red} from 'barva';
 import portfinder from 'portfinder';
-import figlet from 'figlet';
+// Removed figlet import as we're using hardcoded ASCII art
 import {createServer} from '../server/index.js';
 import {config} from '../server/config.js';
 import fs from 'fs';
@@ -62,25 +62,18 @@ const logo = `
 `;
 
 
-  figlet('magikServer', {font: 'Doom'}, (err, data) => {
-    if (err) {
-      console.log(magenta`    magikServer`);
-      return;
-    }
+  console.clear();
+  console.log(magenta`${logo}`);
+  console.log(green`(v.${config.version})`);
+  console.log(grey`${divider}`);
 
-    console.clear();
-    console.log(magenta`${data}`);
-    console.log(green`(v.${config.version})`);
-    console.log(grey`${divider}`);
+  if (config.portChanged) {
+    console.log(red`WARNING port ${config.portChanged} in use, changed to ${config.port}`);
+  }
 
-    if (config.portChanged) {
-      console.log(red`WARNING port ${config.portChanged} in use, changed to ${config.port}`);
-    }
-
-    console.log(green`started magik-server on http://${config.address}:${config.port}`);
-    console.log(green`Hit CTRL-C to stop (waiting for requests)`);
-    console.log(grey`${divider}`);
-  });
+  console.log(green`started magik-server on http://${config.address}:${config.port}`);
+  console.log(green`Hit CTRL-C to stop (waiting for requests)`);
+  console.log(grey`${divider}`);
 }
 
 /**
@@ -91,17 +84,15 @@ const logo = `
 function onSignalInterrupt(server, config) {
   const divider = '-'.repeat(process.stdout.columns || 80);
 
-  figlet('magikServer', {font: 'Doom'}, (err, data) => {
-    console.clear();
-    console.log(red`${err ? '    magikServer' : data}`);
-    console.log(red`(v.${config.version})`);
-    console.log(grey`${divider}`);
-    console.log(red`magik-server shutting down`);
+  console.clear();
+  console.log(red`${logo}`);
+  console.log(red`(v.${config.version})`);
+  console.log(grey`${divider}`);
+  console.log(red`magik-server shutting down`);
 
-    // Gracefully shut down the server and exit
-    server.close(() => {
-      process.exit(0);
-    });
+  // Gracefully shut down the server and exit
+  server.close(() => {
+    process.exit(0);
   });
 }
 
