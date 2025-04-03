@@ -5,7 +5,7 @@
 
 import path from 'path';
 import {fileURLToPath} from 'url';
-import {barva} from 'barva';
+import {magenta, green, grey, yellow, red} from 'barva';
 import portfinder from 'portfinder';
 import figlet from 'figlet';
 import {createServer} from '../server/index.js';
@@ -39,7 +39,7 @@ function openUrl(url) {
       cp.exec(command);
     });
   } catch (e) {
-    console.log(barva.yellow(`Could not open browser at ${url}`));
+    console.log(yellow`Could not open browser at ${url}`);
   }
 }
 
@@ -52,22 +52,22 @@ function displaySplashScreen(config) {
 
   figlet('magikServer', {font: 'Doom'}, (err, data) => {
     if (err) {
-      console.log(barva.magenta('    magikServer'));
+      console.log(magenta`    magikServer`);
       return;
     }
 
     console.clear();
-    console.log(barva.magenta(data));
-    console.log(barva.green(`(v.${config.version})`));
-    console.log(barva.grey(divider));
+    console.log(magenta`${data}`);
+    console.log(green`(v.${config.version})`);
+    console.log(grey`${divider}`);
 
     if (config.portChanged) {
-      console.log(barva.red(`WARNING port ${config.portChanged} in use, changed to ${config.port}`));
+      console.log(red`WARNING port ${config.portChanged} in use, changed to ${config.port}`);
     }
 
-    console.log(barva.green(`started magik-server on http://${config.address}:${config.port}`));
-    console.log(barva.green('Hit CTRL-C to stop (waiting for requests)'));
-    console.log(barva.grey(divider));
+    console.log(green`started magik-server on http://${config.address}:${config.port}`);
+    console.log(green`Hit CTRL-C to stop (waiting for requests)`);
+    console.log(grey`${divider}`);
   });
 }
 
@@ -81,10 +81,10 @@ function onSignalInterrupt(server, config) {
 
   figlet('magikServer', {font: 'Doom'}, (err, data) => {
     console.clear();
-    console.log(barva.red(err ? '    magikServer' : data));
-    console.log(barva.red(`(v.${config.version})`));
-    console.log(barva.grey(divider));
-    console.log(barva.red('magik-server shutting down'));
+    console.log(red`${err ? '    magikServer' : data}`);
+    console.log(red`(v.${config.version})`);
+    console.log(grey`${divider}`);
+    console.log(red`magik-server shutting down`);
 
     // Gracefully shut down the server and exit
     server.close(() => {
@@ -98,8 +98,8 @@ function onSignalInterrupt(server, config) {
  */
 function onExit() {
   const divider = '-'.repeat(process.stdout.columns || 80);
-  console.log(barva.red('magik-server stopped'));
-  console.log(barva.grey(divider));
+  console.log(red`magik-server stopped`);
+  console.log(grey`${divider}`);
 }
 
 /**
@@ -123,7 +123,7 @@ function startServer(config) {
       try {
         onSignalInterrupt(server, config);
       } catch (e) {
-        console.log(barva.red('Hold on...'));
+        console.log(red`Hold on...`);
         process.exit(1);
       }
     });
@@ -150,11 +150,11 @@ try {
   portfinder.getPort({host: config.address}, (error, port) => {
     if (error) {
       if (error.code === 'EADDRNOTAVAIL') {
-        console.log(barva.red(`ERROR: Server address not available: ${config.address}`));
+        console.log(red`ERROR: Server address not available: ${config.address}`);
       } else if (error.code === 'EADDRINUSE') {
-        console.log(barva.red(`ERROR: no suitable port found (${config.port}). Is the server already running?`));
+        console.log(red`ERROR: no suitable port found (${config.port}). Is the server already running?`);
       } else {
-        console.log(barva.red('ERROR: starting server failed'));
+        console.log(red`ERROR: starting server failed`);
       }
       process.exit(1);
     } else {
@@ -164,6 +164,6 @@ try {
     }
   });
 } catch (e) {
-  console.error(barva.red('Error starting server:'), e);
+  console.error(red`Error starting server:`, e);
   process.exit(1);
 }
