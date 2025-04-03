@@ -176,9 +176,9 @@ class MagikServer {
         this.readFile(responseObj, (resObj) => {
           resObj.data = resObj.data.toString()
             .replace(/##LISTING##/, listingHtml)
-            .replace(/##URL##/, resObj.parsedUrl.pathname)
-            .replace(/##VERSION##/, resObj.config.version)
-            .replace(/##LINK##/, resObj.config.pkg.homepage);
+            .replace(/##URL##/g, resObj.parsedUrl.pathname)
+            .replace(/##VERSION##/g, resObj.config.version)
+            .replace(/##LINK##/g, resObj.config.pkg.homepage);
 
           return resObj;
         });
@@ -264,9 +264,9 @@ class MagikServer {
 
     this.readFile(responseObj, (resObj) => {
       resObj.data = resObj.data.toString()
-        .replace(/##URL##/, resObj.parsedUrl.pathname)
-        .replace(/##VERSION##/, resObj.config.version)
-        .replace(/##LINK##/, resObj.config.pkg.homepage);
+        .replace(/##URL##/g, resObj.parsedUrl.pathname)
+        .replace(/##VERSION##/g, resObj.config.version)
+        .replace(/##LINK##/g, resObj.config.pkg.homepage);
 
       return resObj;
     });
