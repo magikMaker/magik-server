@@ -350,7 +350,7 @@ class MagikServer {
     const fileSizeString = responseObj.data ? bytes(responseObj.data.length || 0) : '0B';
 
     console.log(grey`request: ${responseObj.request.method} ${responseObj.request.url}`);
-    console.log(grey`responseString`);
+    console.log(grey`responseString: ${responseString}`);
     console.log(grey`response time: ${realResponseTime}ms`);
     console.log(grey`file size: ${fileSizeString}`);
     console.log(grey`${divider}`);

@@ -7,13 +7,28 @@ import path from 'path';
 import {fileURLToPath} from 'url';
 import {magenta, green, grey, yellow, red} from 'barva';
 import portfinder from 'portfinder';
-// Removed figlet import as we're using hardcoded ASCII art
 import {createServer} from '../server/index.js';
 import {config} from '../server/config.js';
 import fs from 'fs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+/**
+ * magik-server logo as ascii art
+ *
+ * @type {string}
+ */
+const logo = `
+                       _ _    _____
+                      (_) |  /  ___|
+ _ __ ___   __ _  __ _ _| | _\\ \`--.  ___ _ ____   _____ _ __
+| '_ \` _ \\ / _\` |/ _\` | | |/ /\`--. \\/ _ \\ '__\\ \\ / / _ \\ '__|
+| | | | | | (_| | (_| | |   </\\__/ /  __/ |   \\ V /  __/ |
+|_| |_| |_|\\__,_|\\__, |_|_|\\_\\____/ \\___|_|    \\_/ \\___|_|
+                  __/ |
+                 |___/
+`;
 
 /**
  * Simple cross-platform URL opener
@@ -49,18 +64,6 @@ function openUrl(url) {
  */
 function displaySplashScreen(config) {
   const divider = '-'.repeat(process.stdout.columns || 80);
-
-const logo = `
-                       _ _    _____
-                      (_) |  /  ___|
- _ __ ___   __ _  __ _ _| | _\\ \`--.  ___ _ ____   _____ _ __
-| '_ \` _ \\ / _\` |/ _\` | | |/ /\`--. \\/ _ \\ '__\\ \\ / / _ \\ '__|
-| | | | | | (_| | (_| | |   </\\__/ /  __/ |   \\ V /  __/ |
-|_| |_| |_|\\__,_|\\__, |_|_|\\_\\____/ \\___|_|    \\_/ \\___|_|
-                  __/ |
-                 |___/
-`;
-
 
   console.clear();
   console.log(magenta`${logo}`);
