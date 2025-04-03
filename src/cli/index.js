@@ -50,6 +50,18 @@ function openUrl(url) {
 function displaySplashScreen(config) {
   const divider = '-'.repeat(process.stdout.columns || 80);
 
+const logo = `
+                       _ _    _____
+                      (_) |  /  ___|
+ _ __ ___   __ _  __ _ _| | _\\ \`--.  ___ _ ____   _____ _ __
+| '_ \` _ \\ / _\` |/ _\` | | |/ /\`--. \\/ _ \\ '__\\ \\ / / _ \\ '__|
+| | | | | | (_| | (_| | |   </\\__/ /  __/ |   \\ V /  __/ |
+|_| |_| |_|\\__,_|\\__, |_|_|\\_\\____/ \\___|_|    \\_/ \\___|_|
+                  __/ |
+                 |___/
+`;
+
+
   figlet('magikServer', {font: 'Doom'}, (err, data) => {
     if (err) {
       console.log(magenta`    magikServer`);

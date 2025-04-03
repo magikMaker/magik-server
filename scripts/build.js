@@ -31,7 +31,16 @@ const buildOptions = {
   banner: {
     js: '#!/usr/bin/env node\n',
   },
-  external: ['child_process']
+  external: [
+    'child_process',
+    'figlet',
+    'fs',
+    'http',
+    'node',
+    'path',
+    'portfinder',
+    'url'
+  ]
 };
 
 if (isWatch) {
