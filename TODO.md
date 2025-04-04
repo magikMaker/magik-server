@@ -12,7 +12,7 @@
 
     Error: Cannot create a string longer than 0x1fffffe8 characters
     at Buffer.toString (node:buffer:836:17)
-    at Timeout._onTimeout (file:///Users/bjorn/.nvm/versions/node/v22.11.0/lib/node_modules/magik-server/dist/cli/index.js:5530:66)
+    at Timeout._onTimeout (file:///xxx/magik-server/dist/cli/index.js:5530:66)
     at listOnTimeout (node:internal/timers:594:17)
     at process.processTimers (node:internal/timers:529:7) {
     code: 'ERR_STRING_TOO_LONG'
