@@ -207,7 +207,7 @@ class MagikServer {
 
         if (fs.existsSync(indexPath) && fs.statSync(indexPath).isFile()) {
           const mimeType = mime.getType(indexPath) || 'text/plain';
-                    responseObj.headers['Content-Type'] = `${mimeType}; charset=${responseObj.config.encoding}`;
+          responseObj.headers['Content-Type'] = `${mimeType}; charset=${responseObj.config.encoding}`;
           responseObj.fileName = path.normalize(`/${responseObj.config.index[i]}${extension}`);
           responseObj.filePath = indexPath;
           this.readFile(responseObj);
@@ -232,8 +232,8 @@ class MagikServer {
     }
 
     // Determine the content type, with fallback to text/plain if null
-        const mimeType = mime.getType(responseObj.filePath) || 'text/plain';
-        responseObj.headers['Content-Type'] = `${mimeType}; charset=${responseObj.config.encoding}`;
+    const mimeType = mime.getType(responseObj.filePath) || 'text/plain';
+    responseObj.headers['Content-Type'] = `${mimeType}; charset=${responseObj.config.encoding}`;
     this.readFile(responseObj);
   }
 
