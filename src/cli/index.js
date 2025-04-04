@@ -34,28 +34,28 @@ const logo = `
  * Simple cross-platform URL opener
  */
 function openUrl(url) {
-    const {platform} = process;
-    let command;
+  const {platform} = process;
+  let command;
 
-    switch (platform) {
-        case 'darwin':
-            command = `open "${url}"`;
-            break;
-        case 'win32':
-            command = `start "" "${url}"`;
-            break;
-        default:
-            command = `xdg-open "${url}"`;
-            break;
-    }
+  switch (platform) {
+  case 'darwin':
+    command = `open "${url}"`;
+    break;
+  case 'win32':
+    command = `start "" "${url}"`;
+    break;
+  default:
+    command = `xdg-open "${url}"`;
+    break;
+  }
 
-    try {
-        import('child_process').then(cp => {
-            cp.exec(command);
-        });
-    } catch (e) {
-        console.log(yellow`Could not open browser at ${url}`);
-    }
+  try {
+    import('child_process').then(cp => {
+      cp.exec(command);
+    });
+  } catch (e) {
+    console.log(yellow`Could not open browser at ${url}`);
+  }
 }
 
 /**
@@ -63,20 +63,20 @@ function openUrl(url) {
  * @param {Object} config - Server configuration
  */
 function displaySplashScreen(config) {
-    const divider = '-'.repeat(process.stdout.columns || 80);
+  const divider = '-'.repeat(process.stdout.columns || 80);
 
-    console.clear();
-    console.log(magenta`${logo}`);
-    console.log(green`(v${config.version})`);
-    console.log(grey`${divider}`);
+  console.clear();
+  console.log(magenta`${logo}`);
+  console.log(green`(v${config.version})`);
+  console.log(grey`${divider}`);
 
-    if (config.portChanged) {
-        console.log(red`WARNING port ${config.portChanged} in use, changed to ${config.port}`);
-    }
+  if (config.portChanged) {
+    console.log(red`WARNING port ${config.portChanged} in use, changed to ${config.port}`);
+  }
 
-    console.log(green`started magik-server on ${config.protocol}://${config.address}:${config.port}`);
-    console.log(green`Hit CTRL-C to stop (waiting for requests)`);
-    console.log(grey`${divider}`);
+  console.log(green`started magik-server on ${config.protocol}://${config.address}:${config.port}`);
+  console.log(green`Hit CTRL-C to stop (waiting for requests)`);
+  console.log(grey`${divider}`);
 }
 
 /**
@@ -85,27 +85,27 @@ function displaySplashScreen(config) {
  * @param {Object} config - Server configuration
  */
 function onSignalInterrupt(server, config) {
-    const divider = '-'.repeat(process.stdout.columns || 80);
+  const divider = '-'.repeat(process.stdout.columns || 80);
 
-    console.clear();
-    console.log(red`${logo}`);
-    console.log(red`(v${config.version})`);
-    console.log(grey`${divider}`);
-    console.log(red`magik-server shutting down`);
+  console.clear();
+  console.log(red`${logo}`);
+  console.log(red`(v${config.version})`);
+  console.log(grey`${divider}`);
+  console.log(red`magik-server shutting down`);
 
-    // Gracefully shut down the server and exit
-    server.close(() => {
-        process.exit(0);
-    });
+  // Gracefully shut down the server and exit
+  server.close(() => {
+    process.exit(0);
+  });
 }
 
 /**
  * Callback executed just before the program exits
  */
 function onExit() {
-    const divider = '-'.repeat(process.stdout.columns || 80);
-    console.log(red`magik-server stopped`);
-    console.log(grey`${divider}`);
+  const divider = '-'.repeat(process.stdout.columns || 80);
+  console.log(red`magik-server stopped`);
+  console.log(grey`${divider}`);
 }
 
 /**
@@ -113,30 +113,30 @@ function onExit() {
  * @param {Object} config - Server configuration
  */
 function startServer(config) {
-    const server = createServer(config);
+  const server = createServer(config);
 
-    server.listen(config.port, config.address, () => {
-        if (config.open) {
-            openUrl(`${config.protocol}://${config.address}:${config.port}`);
-        }
+  server.listen(config.port, config.address, () => {
+    if (config.open) {
+      openUrl(`${config.protocol}://${config.address}:${config.port}`);
+    }
 
-        displaySplashScreen(config);
+    displaySplashScreen(config);
+  });
+
+  // Handle SIGINT (CTRL+C)
+  if (process.platform !== 'win32') {
+    process.on('SIGINT', () => {
+      try {
+        onSignalInterrupt(server, config);
+      } catch (e) {
+        console.log(red`Hold on...`);
+        process.exit(1);
+      }
     });
 
-    // Handle SIGINT (CTRL+C)
-    if (process.platform !== 'win32') {
-        process.on('SIGINT', () => {
-            try {
-                onSignalInterrupt(server, config);
-            } catch (e) {
-                console.log(red`Hold on...`);
-                process.exit(1);
-            }
-        });
-
-        // Restore cursor on exit
-        process.on('exit', onExit);
-    }
+    // Restore cursor on exit
+    process.on('exit', onExit);
+  }
 }
 
 // Get package info and extend config
@@ -151,25 +151,25 @@ config.versionInfo = `(v${packageInfo.version})`;
 
 // Check if port and address are available
 try {
-    portfinder.basePort = config.port;
+  portfinder.basePort = config.port;
 
-    portfinder.getPort({host: config.address}, (error, port) => {
-        if (error) {
-            if (error.code === 'EADDRNOTAVAIL') {
-                console.log(red`ERROR: Server address not available: ${config.address}`);
-            } else if (error.code === 'EADDRINUSE') {
-                console.log(red`ERROR: no suitable port found (${config.port}). Is the server already running?`);
-            } else {
-                console.log(red`ERROR: starting server failed`);
-            }
-            process.exit(1);
-        } else {
-            config.portChanged = config.port !== port && config.port !== 8080 ? config.port : false;
-            config.port = port;
-            startServer(config);
-        }
-    });
+  portfinder.getPort({host: config.address}, (error, port) => {
+    if (error) {
+      if (error.code === 'EADDRNOTAVAIL') {
+        console.log(red`ERROR: Server address not available: ${config.address}`);
+      } else if (error.code === 'EADDRINUSE') {
+        console.log(red`ERROR: no suitable port found (${config.port}). Is the server already running?`);
+      } else {
+        console.log(red`ERROR: starting server failed`);
+      }
+      process.exit(1);
+    } else {
+      config.portChanged = config.port !== port && config.port !== 8080 ? config.port : false;
+      config.port = port;
+      startServer(config);
+    }
+  });
 } catch (e) {
-    console.error(red`Error starting server:`, e);
-    process.exit(1);
+  console.error(red`Error starting server:`, e);
+  process.exit(1);
 }
