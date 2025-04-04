@@ -34,7 +34,7 @@ $ magik-server
 ![magikServer](https://i.postimg.cc/0QhxG6kY/magik-server.png)
 
 # <a name="about"></a>About
-magik-server is a small webserver that is intended to use during the
+magik-server is a small webserver that is intended to be used during the
 development of front-end web applications and websites. There are quite a few
 configuration options that can be set using command line switches, see below.
 Also there's the possibility to influence server responses using
