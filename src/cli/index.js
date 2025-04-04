@@ -74,7 +74,7 @@ function displaySplashScreen(config) {
         console.log(red`WARNING port ${config.portChanged} in use, changed to ${config.port}`);
     }
 
-    console.log(green`started magik-server on ${config.protocol}${config.address}:${config.port}`);
+    console.log(green`started magik-server on ${config.protocol}://${config.address}:${config.port}`);
     console.log(green`Hit CTRL-C to stop (waiting for requests)`);
     console.log(grey`${divider}`);
 }
