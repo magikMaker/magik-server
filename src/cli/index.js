@@ -74,7 +74,7 @@ function displaySplashScreen(config) {
         console.log(red`WARNING port ${config.portChanged} in use, changed to ${config.port}`);
     }
 
-    console.log(green`started magik-server on http://${config.address}:${config.port}`);
+    console.log(green`started magik-server on ${config.protocol}${config.address}:${config.port}`);
     console.log(green`Hit CTRL-C to stop (waiting for requests)`);
     console.log(grey`${divider}`);
 }
@@ -89,7 +89,7 @@ function onSignalInterrupt(server, config) {
 
     console.clear();
     console.log(red`${logo}`);
-    console.log(red`(v.${config.version})`);
+    console.log(red`(v${config.version})`);
     console.log(grey`${divider}`);
     console.log(red`magik-server shutting down`);
 
@@ -147,7 +147,7 @@ const packageInfo = JSON.parse(fs.readFileSync(packagePath, 'utf8'));
 config.pkg = packageInfo;
 config.protocol = 'http';
 config.version = packageInfo.version;
-config.versionInfo = `(v.${packageInfo.version})`;
+config.versionInfo = `(v${packageInfo.version})`;
 
 // Check if port and address are available
 try {
