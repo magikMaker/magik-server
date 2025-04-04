@@ -63,6 +63,7 @@ Also there's the possibility to influence server responses using
   - [Query String Parameters](#query-string-parameters)
 - [Examples](#examples)
 - [Contributing](#contributing)
+- [Icons](#icons)
 - [License](#license)
 
 
@@ -286,6 +287,8 @@ $ yarn lint
 $ yarn test
 ```
 
+# <a name="icons"></a>Icons
+The icons are from [vscode codicons](https://github.com/microsoft/vscode-codicons). 
 
 # <a name="license"></a>License
 
