@@ -172,7 +172,7 @@ class MagikServer {
 
         // No index found, show directory listing if enabled
         if (responseObj.config.dirs === true) {
-            responseObj.headers['Content-Type'] = 'text/html';
+            responseObj.headers['Content-Type'] = `text/html; charset=${responseObj.config.encoding}`;
             responseObj.fileName = responseObj.pathName;
             responseObj.directoryPath = responseObj.filePath;
             responseObj.filePath = path.normalize(`${__dirname}/../assets/listing.html`);
@@ -206,7 +206,7 @@ class MagikServer {
                 const indexPath = path.normalize(`${responseObj.filePath}${responseObj.config.index[i]}${extension}`);
 
                 if (fs.existsSync(indexPath) && fs.statSync(indexPath).isFile()) {
-                    responseObj.headers['Content-Type'] = mime.getType(indexPath);
+                    responseObj.headers['Content-Type'] = `${mime.getType(indexPath)}; charset=${responseObj.config.encoding}`;
                     responseObj.fileName = path.normalize(`/${responseObj.config.index[i]}${extension}`);
                     responseObj.filePath = indexPath;
                     this.readFile(responseObj);
@@ -230,7 +230,7 @@ class MagikServer {
             return;
         }
 
-        responseObj.headers['Content-Type'] = mime.getType(responseObj.filePath);
+        responseObj.headers['Content-Type'] = `${mime.getType(responseObj.filePath)}; charset=${responseObj.config.encoding}`;
         this.readFile(responseObj);
     }
 
@@ -247,7 +247,7 @@ class MagikServer {
 
         // File not found, set 404 code unless status code has been overridden
         responseObj.httpStatusCode = responseObj.httpStatusCode === 200 ? 404 : responseObj.httpStatusCode;
-        responseObj.headers['Content-Type'] = 'text/html';
+        responseObj.headers['Content-Type'] = `text/html; charset=${responseObj.config.encoding}`;
         responseObj.fileName = '';
 
         // Try to find custom 404 page
