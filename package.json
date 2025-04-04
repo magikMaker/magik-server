@@ -1,6 +1,6 @@
 {
   "name": "magik-server",
-  "version": "0.1.1-beta.3",
+  "version": "0.1.1",
   "description": "A simple HTTP development server with some nice magik.",
   "main": "dist/index.js",
   "bin": "dist/cli/index.js",
