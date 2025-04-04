@@ -5,7 +5,7 @@
 
 ## <a name="getting-started"></a>Getting Started
 
-Install the package (globally) and start the server:
+Install the package (globally) and start the server.
 
 ### npm
 ```sh
