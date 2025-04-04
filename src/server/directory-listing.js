@@ -15,7 +15,7 @@ import { red } from 'barva';
  * @param {Function} callback - Callback function to receive HTML content
  */
 export function createDirectoryListing(responseObj, callback) {
-  const dirPath = responseObj.filePath;
+  const dirPath = responseObj.directoryPath || responseObj.filePath;
   const requestPath = responseObj.pathName;
 
   fs.readdir(dirPath, (error, files) => {

@@ -174,6 +174,7 @@ class MagikServer {
         if (responseObj.config.dirs === true) {
             responseObj.headers['Content-Type'] = 'text/html';
             responseObj.fileName = responseObj.pathName;
+            responseObj.directoryPath = responseObj.filePath;
             responseObj.filePath = path.normalize(`${__dirname}/../assets/listing.html`);
 
             createDirectoryListing(responseObj, (listingHtml) => {
