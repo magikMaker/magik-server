@@ -305,7 +305,7 @@ class MagikServer {
      * @param {Function} parser - Optional parser function to process the file
      */
     readFile(responseObj, parser) {
-        fs.readFile(responseObj.filePath, (error, data) => {
+        fs.readFile(responseObj.filePath, responseObj.config.encoding, (error, data) => {
             if (error) {
                 console.log(red`ERROR:`, error);
                 this.sendFileNotFound(responseObj);
@@ -332,7 +332,9 @@ class MagikServer {
 
         setTimeout(() => {
             if (responseObj.data) {
-                responseObj.headers['Content-Length'] = responseObj.data.toString().length;
+                // Calculate Content-Length correctly based on the string
+                // If it's a string, use Buffer.byteLength to get the correct byte length
+                responseObj.headers['Content-Length'] = Buffer.byteLength(responseObj.data, responseObj.config.encoding);
             }
 
             responseObj.response.writeHead(responseObj.httpStatusCode, responseObj.headers);
