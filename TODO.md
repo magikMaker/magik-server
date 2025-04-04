@@ -1,7 +1,8 @@
 # ToDo
 
 -[ ] document root, if not provided should be start of executions
-- [ ] redirect when no `/` in pathName? (create-server.js::handleDirectoryRequest()) 
+- [ ] redirect when no `/` in pathName? (create-server.js::handleDirectoryRequest())
+- [ ] add icons to directory listing
 -[ ] large files 1000MB break the code (ERR_STRING_TOO_LONG)
     ```
   node:buffer:836
