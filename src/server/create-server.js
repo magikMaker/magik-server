@@ -123,6 +123,7 @@ class MagikServer {
             .then(stats => {
                 responseObj.fileStats = stats;
 
+                // console.log(`filestat`, stats.isDirectory(), stats);
                 if (stats.isDirectory()) {
                     this.handleDirectoryRequest(responseObj);
                 } else if (stats.isFile()) {
@@ -139,6 +140,7 @@ class MagikServer {
      * @param {ResponseObject} responseObj - Response object
      */
     handleDirectoryRequest(responseObj) {
+
         // If the directory/request does not end with a slash, send a redirect
         if (!/\/$/.test(responseObj.parsedUrl.pathname)) {
             let location = `${responseObj.host}${responseObj.parsedUrl.pathname}/`;
@@ -163,7 +165,9 @@ class MagikServer {
         // Try to find an index and serve that
         if (responseObj.config.index) {
             const indexFound = this.findAndServeIndex(responseObj);
-            if (indexFound) return;
+            if (indexFound) {
+                return;
+            }
         }
 
         // No index found, show directory listing if enabled

@@ -19,6 +19,8 @@ export function createDirectoryListing(responseObj, callback) {
   const requestPath = responseObj.pathName;
 
   fs.readdir(dirPath, (error, files) => {
+    // console.log(red`>>> DL: `, dirPath, error);
+
     if (error) {
       console.log(red`ERROR reading directory:`, error);
       callback('<p class="error">Error reading directory</p>');
