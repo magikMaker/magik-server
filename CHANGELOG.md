@@ -26,14 +26,16 @@ Make sure to add a link to the Pull Request and/or issue number (if applicable)
 
 ### Added
 - `CHANGELOG.md` file
+- adds version script
 
-### Changed
-- complete codebase has been refactord to (more) modern standards
 
 -------------------------------------------------------------------------------
 
-<a name="0.1.1"></a>
-## [0.1.1](https://github.com/MarduXXX/exquex.com/releases/tag/1.0.0) - 2025-04-04
+<a name="0.1.2"></a>
+## [0.1.2](https://github.com/magikMaker/magik-server/releases/tag/0.1.2) - 2025-04-04
+
+### Changed
+- complete codebase has been refactord to (more) modern standards
 
 
 -------------------------------------------------------------------------------

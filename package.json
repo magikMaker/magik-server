@@ -1,6 +1,6 @@
 {
   "name": "magik-server",
-  "version": "0.1.2",
+  "version": "0.1.4-beta.1",
   "description": "A simple HTTP development server with some nice magik.",
   "main": "dist/index.js",
   "bin": "dist/cli/index.js",
@@ -18,12 +18,13 @@
     "major": "yarn preversion && yarn version major && yarn postversion",
     "minor": "yarn preversion && yarn version minor && yarn postversion",
     "patch": "yarn preversion && yarn version patch && yarn postversion",
-    "postversion": "git push --tags && yarn npm publish --tag $npm_package_version && git push && echo \"Successfully released version $npm_package_version!\"",
+    "postversion": "git push --tags && yarn npm publish --tag latest && git push && echo \"Successfully released version $npm_package_version!\"",
     "prebuild": "yarn lint && yarn test",
     "prepare": "npm run build",
     "prepublishOnly": "yarn lint && yarn test && yarn build",
     "preversion": "yarn lint && yarn test",
-    "publish:test": "yarn publish --registry http://localhost:4873",
+    "//publish:beta": "node scripts/version.js --beta && yarn build && yarn npm publish --tag beta",
+    "publish:beta": "node scripts/version.js --beta && yarn build",
     "start": "node dist/cli/index.js",
     "test": "NODE_OPTIONS=--experimental-vm-modules jest"
   },
