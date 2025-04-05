@@ -32,6 +32,7 @@ class ResponseObject {
   constructor(config, request, response) {
     this.data = {};
     this.config = config;
+    this.fileStats = null; // set in router(): fs.promises.stat()
     this.isBinary = false;
     this.request = request;
     this.response = response;
@@ -301,6 +302,9 @@ class MagikServer {
     responseObj.response.writeHead(responseObj.httpStatusCode, responseObj.headers);
     responseObj.response.end();
 
+    // For redirects, there's no file size to report
+    responseObj.streamed = false;
+    responseObj.data = null;
     this.logResponse(responseObj);
   }
 
@@ -321,56 +325,108 @@ class MagikServer {
    * @param {Function} [parser] - Optional parser function to process the file
    */
   readFile(responseObj, parser = null) {
+    // Always use buffer if a parser is specified
+    // For files without a parser:
+    // - Stream large text files (>1MB)
+    // - Stream all binary files
+    // - Buffer small text files
+    const LARGE_FILE = 1048576; // 1048576 = 1024 * 1024
+    const useBuffer = parser ||
+      (!responseObj.isBinary && (!responseObj.fileStats || responseObj.fileStats.size < LARGE_FILE));
 
-    // For binary files, don't specify encoding
-    const options = {
-      encoding: responseObj.isBinary ? null : responseObj.config.encoding
-    };
+    if (useBuffer) {
+      // For binary files, don't specify encoding
+      const options = {
+        encoding: responseObj.isBinary ? null : responseObj.config.encoding
+      };
 
-    fs.readFile(responseObj.filePath, options, (error, data) => {
-      if (error) {
-        console.log(red`ERROR:`, error);
+      fs.readFile(responseObj.filePath, options, (error, data) => {
+        if (error) {
+          console.log(red`ERROR:`, error);
+          this.sendFileNotFound(responseObj);
+          return;
+        }
+
+        // This will be a Buffer for binary files
+        responseObj.data = data;
+
+        if (parser) {
+          responseObj = parser(responseObj);
+        }
+
+        // Apply delay only after successfully reading/processing the file
+        const wait = Math.max(0, responseObj.responseTime - (new Date() - responseObj.startTime));
+        setTimeout(() => {
+          this.sendFile(responseObj);
+        }, wait);
+      });
+    } else {
+      // For binary files and large files without parser, use streaming
+      try {
+        // Set Content-Length header based on file stats
+        if (responseObj.fileStats) {
+          responseObj.headers['Content-Length'] = responseObj.fileStats.size;
+        }
+
+        // Create read stream immediately to detect errors early
+        const readStream = fs.createReadStream(responseObj.filePath);
+
+        // Handle stream errors
+        readStream.on('error', (error) => {
+          console.log(red`ERROR on stream:`, error);
+          // If headers haven't been sent yet, send error response
+          if (!responseObj.response.headersSent) {
+            this.sendFileNotFound(responseObj);
+          } else {
+            // Otherwise just end the response
+            responseObj.response.end();
+          }
+        });
+
+        // Apply delay only before starting to send the file
+        const wait = Math.max(0, responseObj.responseTime - (new Date() - responseObj.startTime));
+        setTimeout(() => {
+          // Write headers and pipe stream to response
+          responseObj.response.writeHead(responseObj.httpStatusCode, responseObj.headers);
+          readStream.pipe(responseObj.response);
+
+          // Log response when stream ends
+          readStream.on('end', () => {
+            // For streamed responses, we don't have data.length in the regular way
+            // Set a flag to indicate this was streamed
+            responseObj.streamed = true;
+            responseObj.streamSize = responseObj.fileStats ? responseObj.fileStats.size : 0;
+            this.logResponse(responseObj);
+          });
+        }, wait);
+      } catch (error) {
+        console.log(red`ERROR setting up stream:`, error);
         this.sendFileNotFound(responseObj);
-        return;
       }
-
-      // This will be a Buffer for binary files
-      responseObj.data = data;
-
-      if (parser) {
-        responseObj = parser(responseObj);
-      }
-
-      this.sendFile(null, responseObj);
-    });
+    }
   }
 
   /**
    * Send the file to the user agent
-   * @param {Error} error - Error object if any
    * @param {ResponseObject} responseObj - Response object
    */
-  sendFile(error, responseObj) {
-    const wait = Math.max(0, responseObj.responseTime - (new Date() - responseObj.startTime));
-
-    setTimeout(() => {
-      if (responseObj.data) {
-        // Calculate Content-Length correctly based on the data type
-        if (Buffer.isBuffer(responseObj.data)) {
-          // For binary data (already a Buffer)
-          responseObj.headers['Content-Length'] = responseObj.data.length;
-        } else {
-          // For text data (string)
-          responseObj.headers['Content-Length'] = Buffer.byteLength(responseObj.data, responseObj.config.encoding);
-        }
+  sendFile(responseObj) {
+    if (responseObj.data) {
+      // Calculate Content-Length correctly based on the data type
+      if (Buffer.isBuffer(responseObj.data)) {
+        // For binary data (already a Buffer)
+        responseObj.headers['Content-Length'] = responseObj.data.length;
+      } else {
+        // For text data (string)
+        responseObj.headers['Content-Length'] = Buffer.byteLength(responseObj.data, responseObj.config.encoding);
       }
+    }
 
-      responseObj.response.writeHead(responseObj.httpStatusCode, responseObj.headers);
-      responseObj.response.write(responseObj.data);
-      responseObj.response.end();
+    responseObj.response.writeHead(responseObj.httpStatusCode, responseObj.headers);
+    responseObj.response.write(responseObj.data);
+    responseObj.response.end();
 
-      this.logResponse(responseObj);
-    }, wait);
+    this.logResponse(responseObj);
   }
 
   /**
@@ -382,12 +438,23 @@ class MagikServer {
 
     const responseString = `response: ${responseObj.httpStatusCode} ${responseObj.fileName || ''}`;
     const realResponseTime = (new Date()).getTime() - responseObj.startTime;
-    const fileSizeString = responseObj.data ? bytes(responseObj.data.length || 0) : '0B';
+
+    // Handle different ways to get file size depending on if it was streamed
+    let fileSizeString;
+    if (responseObj.streamed) {
+      fileSizeString = bytes(responseObj.streamSize || 0);
+    } else {
+      fileSizeString = responseObj.data ? bytes(responseObj.data.length || 0) : '0B';
+    }
 
     console.log(grey`request: ${responseObj.request.method} ${responseObj.request.url}`);
-    console.log(grey`responseString: ${responseString}`);
+    console.log(grey`${responseString}`);
     console.log(grey`response time: ${realResponseTime}ms`);
     console.log(grey`file size: ${fileSizeString}`);
+    console.log(grey`content-type: ${responseObj.headers['Content-Type']}`);
+    if (responseObj.streamed) {
+      console.log(grey`transfer: streamed`);
+    }
     console.log(grey`${divider}`);
   }
 }
