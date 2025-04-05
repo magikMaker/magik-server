@@ -115,7 +115,7 @@ export const config = yargs(hideBin(process.argv))
     u: 'file encoding',
     v: 'display version information'
   })
-  .defaults({
+  .default({
     'address': 'localhost',
     'cors': false,
     'dirs': true,
@@ -153,7 +153,7 @@ export const config = yargs(hideBin(process.argv))
   .wrap(80)
   .strict()
   .usage('\nUsage:\n  $0 [options]\n')
-  .version('v')
+  .version()
   .help('h', 'display this help information')
   .showHelpOnFail(false, 'Specify --help for available options')
   .example('magik-server -p 8090', 'start the server on port 8090')
