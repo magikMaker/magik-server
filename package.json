@@ -1,6 +1,6 @@
 {
   "name": "magik-server",
-  "version": "0.1.4-beta.3",
+  "version": "0.1.4",
   "description": "A simple HTTP development server with some nice magik.",
   "main": "dist/index.js",
   "bin": "dist/cli/index.js",
@@ -14,7 +14,7 @@
     "build": "yarn prebuild && node scripts/build.js",
     "bundle-size": "node scripts/bundle-size.js",
     "dev": "node scripts/build.js --watch & yarn start",
-    "echo": "echo \"Successfully released version $npm_package_version!\"",
+    "echo": "echo \"\n\u001b[32m✓ Successfully published version $npm_package_version to the npm registry!\"",
     "lint": "eslint src --ext .js --fix",
     "major": "yarn preversion && yarn version major && yarn postversion",
     "minor": "yarn preversion && yarn version minor && yarn postversion",
