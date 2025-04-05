@@ -13,6 +13,7 @@ import {grey, red} from 'barva';
 
 import {createDirectoryListing} from './directory-listing.js';
 import {bytes} from '../utils/bytes.js';
+import {isBinaryMimeType} from '../utils/mime-types.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -23,14 +24,15 @@ const __dirname = path.dirname(__filename);
  */
 class ResponseObject {
   /**
-     * Create a new response object
-     * @param {Object} config - Server configuration
-     * @param {Object} request - HTTP request object
-     * @param {Object} response - HTTP response object
-     */
+   * Create a new response object
+   * @param {Object} config - Server configuration
+   * @param {Object} request - HTTP request object
+   * @param {Object} response - HTTP response object
+   */
   constructor(config, request, response) {
     this.data = {};
     this.config = config;
+    this.isBinary = false;
     this.request = request;
     this.response = response;
     this.host = `${config.protocol}://${config.address}:${config.port}`;
@@ -71,9 +73,9 @@ class ResponseObject {
  */
 class MagikServer {
   /**
-     * Create a new server instance
-     * @param {Object} config - Server configuration
-     */
+   * Create a new server instance
+   * @param {Object} config - Server configuration
+   */
   constructor(config) {
     if (!config) {
       throw new Error(red`ERROR: magikServer needs a configuration!`);
@@ -84,36 +86,36 @@ class MagikServer {
   }
 
   /**
-     * Start listening for incoming requests
-     * @param  {...any} args - Arguments for server.listen
-     */
+   * Start listening for incoming requests
+   * @param  {...any} args - Arguments for server.listen
+   */
   listen(...args) {
     this.server.listen(...args);
   }
 
   /**
-     * Close the server gracefully
-     * @param {Function} callback - Callback to execute after server is closed
-     * @returns {Object} Server instance
-     */
+   * Close the server gracefully
+   * @param {Function} callback - Callback to execute after server is closed
+   * @returns {Object} Server instance
+   */
   close(callback) {
     return this.server.close(callback);
   }
 
   /**
-     * Request listener for HTTP server
-     * @param {Object} request - HTTP request object
-     * @param {Object} response - HTTP response object
-     */
+   * Request listener for HTTP server
+   * @param {Object} request - HTTP request object
+   * @param {Object} response - HTTP response object
+   */
   requestListener(request, response) {
     const responseObj = new ResponseObject(this.config, request, response);
     this.router(responseObj);
   }
 
   /**
-     * Route the request to appropriate handlers
-     * @param {ResponseObject} responseObj - Response object
-     */
+   * Route the request to appropriate handlers
+   * @param {ResponseObject} responseObj - Response object
+   */
   router(responseObj) {
     // Check if the path exists
     fs.promises.access(responseObj.filePath)
@@ -136,9 +138,9 @@ class MagikServer {
   }
 
   /**
-     * Handle requests for directories
-     * @param {ResponseObject} responseObj - Response object
-     */
+   * Handle requests for directories
+   * @param {ResponseObject} responseObj - Response object
+   */
   handleDirectoryRequest(responseObj) {
 
     // If the directory/request does not end with a slash, send a redirect
@@ -158,9 +160,9 @@ class MagikServer {
   }
 
   /**
-     * Process directory request after redirect checks
-     * @param {ResponseObject} responseObj - Response object
-     */
+   * Process directory request after redirect checks
+   * @param {ResponseObject} responseObj - Response object
+   */
   processDirectoryRequest(responseObj) {
     // Try to find an index and serve that
     if (responseObj.config.index) {
@@ -195,10 +197,10 @@ class MagikServer {
   }
 
   /**
-     * Find and serve an index file in a directory
-     * @param {ResponseObject} responseObj - Response object
-     * @returns {boolean} Whether an index was found and served
-     */
+   * Find and serve an index file in a directory
+   * @param {ResponseObject} responseObj - Response object
+   * @returns {boolean} Whether an index was found and served
+   */
   findAndServeIndex(responseObj) {
     for (let i = 0; i < responseObj.config.index.length; i++) {
       for (let j = 0; j <= responseObj.config.extensions.length; j++) {
@@ -207,7 +209,12 @@ class MagikServer {
 
         if (fs.existsSync(indexPath) && fs.statSync(indexPath).isFile()) {
           const mimeType = mime.getType(indexPath) || 'text/plain';
-          responseObj.headers['Content-Type'] = `${mimeType}; charset=${responseObj.config.encoding}`;
+          if (isBinaryMimeType(mimeType)) {
+            responseObj.headers['Content-Type'] = mimeType;
+            responseObj.isBinary = true;
+          } else {
+            responseObj.headers['Content-Type'] = `${mimeType}; charset=${responseObj.config.encoding}`;
+          }
           responseObj.fileName = path.normalize(`/${responseObj.config.index[i]}${extension}`);
           responseObj.filePath = indexPath;
           this.readFile(responseObj);
@@ -219,9 +226,9 @@ class MagikServer {
   }
 
   /**
-     * Handle requests for files
-     * @param {ResponseObject} responseObj - Response object
-     */
+   * Handle requests for files
+   * @param {ResponseObject} responseObj - Response object
+   */
   handleFileRequest(responseObj) {
     responseObj.fileName = responseObj.pathName.substring(responseObj.pathName.lastIndexOf('/') + 1);
 
@@ -233,14 +240,19 @@ class MagikServer {
 
     // Determine the content type, with fallback to text/plain if null
     const mimeType = mime.getType(responseObj.filePath) || 'text/plain';
-    responseObj.headers['Content-Type'] = `${mimeType}; charset=${responseObj.config.encoding}`;
+    if (isBinaryMimeType(mimeType)) {
+      responseObj.headers['Content-Type'] = mimeType;
+      responseObj.isBinary = true;
+    } else {
+      responseObj.headers['Content-Type'] = `${mimeType}; charset=${responseObj.config.encoding}`;
+    }
     this.readFile(responseObj);
   }
 
   /**
-     * Send a 404 Not Found response
-     * @param {ResponseObject} responseObj - Response object
-     */
+   * Send a 404 Not Found response
+   * @param {ResponseObject} responseObj - Response object
+   */
   sendFileNotFound(responseObj) {
     // If request was for a favicon, send the magik favicon
     if (responseObj.parsedUrl.pathname === '/favicon.ico') {
@@ -281,9 +293,9 @@ class MagikServer {
   }
 
   /**
-     * Send a redirection response
-     * @param {ResponseObject} responseObj - Response object
-     */
+   * Send a redirection response
+   * @param {ResponseObject} responseObj - Response object
+   */
   sendRedirect(responseObj) {
     responseObj.httpStatusCode = 301;
     responseObj.response.writeHead(responseObj.httpStatusCode, responseObj.headers);
@@ -293,28 +305,36 @@ class MagikServer {
   }
 
   /**
-     * Send favicon.ico
-     * @param {ResponseObject} responseObj - Response object
-     */
+   * Send favicon.ico
+   * @param {ResponseObject} responseObj - Response object
+   */
   sendFavicon(responseObj) {
+    responseObj.isBinary = true;
     responseObj.headers['Content-Type'] = 'image/x-icon';
     responseObj.filePath = path.normalize(`${__dirname}/../assets/favicon.ico`);
     this.readFile(responseObj);
   }
 
   /**
-     * Read a file from disk
-     * @param {ResponseObject} responseObj - Response object
-     * @param {Function} parser - Optional parser function to process the file
-     */
-  readFile(responseObj, parser) {
-    fs.readFile(responseObj.filePath, responseObj.config.encoding, (error, data) => {
+   * Read a file from disk
+   * @param {ResponseObject} responseObj - Response object
+   * @param {Function} [parser] - Optional parser function to process the file
+   */
+  readFile(responseObj, parser = null) {
+
+    // For binary files, don't specify encoding
+    const options = {
+      encoding: responseObj.isBinary ? null : responseObj.config.encoding
+    };
+
+    fs.readFile(responseObj.filePath, options, (error, data) => {
       if (error) {
         console.log(red`ERROR:`, error);
         this.sendFileNotFound(responseObj);
         return;
       }
 
+      // This will be a Buffer for binary files
       responseObj.data = data;
 
       if (parser) {
@@ -326,18 +346,23 @@ class MagikServer {
   }
 
   /**
-     * Send the file to the user agent
-     * @param {Error} error - Error object if any
-     * @param {ResponseObject} responseObj - Response object
-     */
+   * Send the file to the user agent
+   * @param {Error} error - Error object if any
+   * @param {ResponseObject} responseObj - Response object
+   */
   sendFile(error, responseObj) {
     const wait = Math.max(0, responseObj.responseTime - (new Date() - responseObj.startTime));
 
     setTimeout(() => {
       if (responseObj.data) {
-        // Calculate Content-Length correctly based on the string
-        // If it's a string, use Buffer.byteLength to get the correct byte length
-        responseObj.headers['Content-Length'] = Buffer.byteLength(responseObj.data, responseObj.config.encoding);
+        // Calculate Content-Length correctly based on the data type
+        if (Buffer.isBuffer(responseObj.data)) {
+          // For binary data (already a Buffer)
+          responseObj.headers['Content-Length'] = responseObj.data.length;
+        } else {
+          // For text data (string)
+          responseObj.headers['Content-Length'] = Buffer.byteLength(responseObj.data, responseObj.config.encoding);
+        }
       }
 
       responseObj.response.writeHead(responseObj.httpStatusCode, responseObj.headers);
@@ -349,9 +374,9 @@ class MagikServer {
   }
 
   /**
-     * Log response information to console
-     * @param {ResponseObject} responseObj - Response object
-     */
+   * Log response information to console
+   * @param {ResponseObject} responseObj - Response object
+   */
   logResponse(responseObj) {
     const divider = '-'.repeat(process.stdout.columns || 80);
 
