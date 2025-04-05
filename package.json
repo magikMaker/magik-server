@@ -23,8 +23,7 @@
     "prepare": "npm run build",
     "prepublishOnly": "yarn lint && yarn test && yarn build",
     "preversion": "yarn lint && yarn test",
-    "//publish:beta": "node scripts/version.js --beta && yarn build && yarn npm publish --tag beta",
-    "publish:beta": "node scripts/version.js --beta && yarn build",
+    "publish:beta": "node scripts/version.js --beta && yarn build && yarn npm publish --tag beta",
     "start": "node dist/cli/index.js",
     "test": "NODE_OPTIONS=--experimental-vm-modules jest"
   },
